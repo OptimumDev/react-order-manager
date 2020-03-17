@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../logo.svg';
 import './App.css';
 import DateComponent from '../DateComponent/DateComponent'
+import Order from '../Order/Order'
 
 function App() {
     return (
@@ -11,7 +12,11 @@ function App() {
                 <h1>
                     Under construction
                 </h1>
-                <DateComponent date={new Date()}/>
+                <DateComponent date={new Date()}/><br/>
+                <Order>
+                    123 456
+                    test
+                </Order>
             </header>
         </div>
     );
