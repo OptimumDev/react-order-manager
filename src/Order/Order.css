@@ -4,7 +4,12 @@
     margin-bottom: 5px;
     background-color: white;
     box-shadow: 5px 5px 1px rgba(0,0,0,0.15);
+    flex-shrink: 0;
 
-    width: 100px;
-    height: 50px;
+    width: 150px;
+    height: 120px;
+}
+
+.order:last-child {
+    margin-right: 5px;
 }

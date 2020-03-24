@@ -1,0 +1,26 @@
+.day {
+    box-sizing: border-box;
+    margin: 0 10px 15px 5px;
+    display: flex;
+    align-items: center;
+}
+
+.orders {
+    min-width: 100px;
+    min-height: 100px;
+    overflow-x: auto;
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    border: black solid 1px;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.4);
+    background-color: white;
+    border-radius: 10px;
+    list-style: none;
+}
+
+.orders:empty {
+    background-image: url(../images/plus.png);
+    background-size: contain;
+    image-rendering: pixelated;
+}

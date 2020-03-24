@@ -1,23 +1,22 @@
 import React from 'react';
-import logo from '../logo.svg';
 import './App.css';
-import DateComponent from '../DateComponent/DateComponent'
-import Order from '../Order/Order'
+import Day from "../Day/Day";
+
+let id = 0;
+const orders = [
+    {
+        text: '123 123\ntest'
+    },
+    {
+        text: 'for more tests'
+    }
+];
 
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <h1>
-                    Under construction
-                </h1>
-                <DateComponent date={new Date()}/><br/>
-                <Order>
-                    123 456
-                    test
-                </Order>
-            </header>
+            <Day date={new Date()} orders={orders.map(o => ({...o, id: id++}))}/>
+            <Day date={new Date('2019-12-31')} orders={orders.map(o => ({...o, id: id++}))}/>
         </div>
     );
 }

@@ -4,9 +4,7 @@ import './Order.css'
 export default class Order extends React.Component {
     render() {
         return (
-            <textarea className='order'>
-                {this.props.children}
-            </textarea>
+            <textarea key={this.props.key} className='order' defaultValue={this.props.children} />
         )
     }
 }
