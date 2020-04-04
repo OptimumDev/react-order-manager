@@ -20,7 +20,7 @@
 }
 
 .orders:empty {
-    background-image: url(../images/plus.png);
+    background-image: url(../../images/plus.png);
     background-size: contain;
     image-rendering: pixelated;
 }

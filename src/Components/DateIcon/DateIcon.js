@@ -1,5 +1,5 @@
 import React from "react";
-import './DateComponent.css'
+import './DateIcon.css'
 
 const monthNames = [
     'Январь',
@@ -17,7 +17,7 @@ const monthNames = [
 ];
 
 
-function DateComponent({date}) {
+function DateIcon({date}) {
     return (
         <div className='date'>
             <div className='month'>
@@ -30,4 +30,4 @@ function DateComponent({date}) {
     )
 }
 
-export default DateComponent;
+export default DateIcon;

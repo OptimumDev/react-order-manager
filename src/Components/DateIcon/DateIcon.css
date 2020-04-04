@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'PF Fusion Sans Pro';
-    src: url(../fonts/PFFusionSansPro-Black.ttf);
+    src: url(../../fonts/PFFusionSansPro-Black.ttf);
 }
 
 
@@ -8,7 +8,7 @@
     width: 100px;
     height: 100px;
     margin-right: 15px;
-    background-image: url(../images/date.png);
+    background-image: url(../../images/date.png);
     background-size: contain;
     border-radius: 15px;
     overflow: hidden;
