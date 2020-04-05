@@ -9,4 +9,14 @@ export const setOrderIds = (newOrderIds, dateStr) => {
             dateStr
         }
     }
-}
+};
+
+export const changeOrder = (orderId, newOrder) => {
+    return {
+        type: actionTypes.CHANGE_ORDER,
+        payload: {
+            orderId,
+            newOrder
+        }
+    }
+};

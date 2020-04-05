@@ -38,6 +38,17 @@ function setOrderIds(state, {payload}) {
     }
 }
 
+function changeOrder(state, {payload}) {
+    return {
+        ...state,
+        ordersById: {
+            ...state.ordersById,
+            [payload.orderId]: payload.newOrder
+        }
+    }
+}
+
 export const rootReducer = createReducer(defaultState, {
-    [actionTypes.SET_ORDER_IDS]: setOrderIds
+    [actionTypes.SET_ORDER_IDS]: setOrderIds,
+    [actionTypes.CHANGE_ORDER]: changeOrder,
 });
