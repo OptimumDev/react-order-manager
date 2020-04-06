@@ -10,21 +10,37 @@ const id4 = uuidv4();
 export const defaultState = {
     ordersById: {
         [id1]: {
-            text: '123 123\ntest'
+            text: '123 123\ntest',
+            number: '1234.5',
+            facility: 'Объект 1',
+            quantity: 123,
+            area: 100,
         },
         [id2]: {
-            text: 'for more tests'
+            text: 'for more tests',
+            number: '3456',
+            facility: 'Объект 2',
+            quantity: 300,
+            area: 500,
         },
         [id3]: {
-            text: 'second day starts'
+            text: 'second day starts',
+            number: '789',
+            facility: 'Объект 3',
+            quantity: 467,
+            area: 425,
         },
         [id4]: {
-            text: 'the last one'
+            text: 'the last one',
+            number: '6754.1',
+            facility: 'Объект 4',
+            quantity: 10,
+            area: 23,
         }
     },
     orderIdsByDate: {
-        '2020-04-01': [ id1, id2 ],
-        '2019-12-31': [ id3, id4 ],
+        '2020-04-01': [id1, id2],
+        '2019-12-31': [id3, id4],
     },
 };
 

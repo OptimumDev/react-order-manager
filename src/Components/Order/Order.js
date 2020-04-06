@@ -1,14 +1,29 @@
 import React from "react";
 import './Order.css'
 
-export default function Order({orderId, order, onChange}) {
-    console.log(orderId);
+export default function Order({order, onChange}) {
     return (
-        <textarea
-            key={orderId}
-            className='order'
-            value={order.text}
-            onChange={e => onChange({...order, text: e.target.value})}
-        />
+        <div className='order-container'>
+            <table className='order'>
+                <tbody>
+                <tr>
+                    <th>Номер</th>
+                    <td>{order.number}</td>
+                </tr>
+                <tr>
+                    <th>Объект</th>
+                    <td>{order.facility}</td>
+                </tr>
+                <tr>
+                    <th>Количество</th>
+                    <td>{order.quantity}</td>
+                </tr>
+                <tr>
+                    <th>Площадь</th>
+                    <td>{order.area}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     );
 }

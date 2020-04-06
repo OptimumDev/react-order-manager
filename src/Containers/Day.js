@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import Day from "../Components/Day/Day";
 import {setOrderIds} from "../ActionCreators";

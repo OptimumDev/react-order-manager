@@ -1,4 +1,3 @@
-import React from 'react';
 import {connect} from 'react-redux';
 import Order from "../Components/Order/Order";
 import {changeOrder} from "../ActionCreators";

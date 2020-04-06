@@ -1,15 +1,21 @@
-.order {
-    border: black solid 1px;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    background-color: white;
-    box-shadow: 5px 5px 1px rgba(0,0,0,0.15);
+.order-container{
+    padding-right: 10px;
+    background-color: transparent;
     flex-shrink: 0;
-
-    width: 150px;
-    height: 120px;
 }
 
-.order:last-child {
-    margin-right: 5px;
+.order {
+    padding: 5px;
+
+    border: #e1e4e8 solid 1px;
+    border-radius: 5px;
+
+    background-color: white;
+    box-shadow: 0 1px 1px rgba(27,31,35,.1);
+}
+
+.order th {
+    text-align: left;
+    padding-right: 10px;
+    font-weight: 600;
 }
