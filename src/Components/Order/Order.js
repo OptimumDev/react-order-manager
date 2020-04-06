@@ -1,8 +1,14 @@
 import React from "react";
 import './Order.css'
 
-export default function Order(props) {
+export default function Order({orderId, order, onChange}) {
+    console.log(orderId);
     return (
-        <textarea key={props.orderId} className='order' value={props.order.text}/>
+        <textarea
+            key={orderId}
+            className='order'
+            value={order.text}
+            onChange={e => onChange({...order, text: e.target.value})}
+        />
     );
 }
