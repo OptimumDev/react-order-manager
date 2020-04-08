@@ -2,7 +2,7 @@
     margin: 5px 10px 15px;
 }
 
-.date, .orders {
+.date, .day-data {
     border: #e1e4e8 solid 1px;
     background-color: #eff1f3;
 }
@@ -24,7 +24,6 @@
     overflow-x: auto;
     display: flex;
     padding: 10px;
-    border-radius: 0 10px 10px 10px;
 }
 
 .orders:empty {
@@ -33,4 +32,11 @@
     background-repeat: no-repeat;
     background-position: center;
     image-rendering: pixelated;
+}
+
+.day-data {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    border-radius: 0 10px 10px 10px;
+    overflow: hidden;
 }
