@@ -1,14 +1,14 @@
 import React from "react";
 import './Day.css'
 import {ReactSortable} from "react-sortablejs";
-import Order from '../../Containers/Order'
+import Order from '../../Components/Order/Order'
 import DayStatistics from "../DayStatistics/DayStatistics";
 
-export default function Day(props) {
+export default function Day({dateStr, orders, setOrders, onOrderChange}) {
     return (
         <div className='day'>
             <div className='date'>
-                {new Date(props.dateStr)
+                {new Date(dateStr)
                     .toLocaleDateString('ru-RU', {year: 'numeric', month: 'long', day: 'numeric'})}
             </div>
             <div className='day-data'>
@@ -16,11 +16,11 @@ export default function Day(props) {
                     className='orders'
                     group='orders'
                     animation={300}
-                    list={props.orderIds.map(id => ({id}))}
-                    setList={items => props.setOrderIds(items.map(item => item.id))}
+                    list={orders}
+                    setList={os => setOrders(os, dateStr)}
                 >
-                    {props.orderIds.map(id =>
-                        <Order orderId={id} key={id}/>
+                    {orders.map(order =>
+                        <Order order={order} onChange={onOrderChange} key={order.id}/>
                     )}
                 </ReactSortable>
                 <DayStatistics/>

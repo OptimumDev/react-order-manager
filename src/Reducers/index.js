@@ -10,24 +10,28 @@ const id4 = uuidv4();
 export const defaultState = {
     ordersById: {
         [id1]: {
+            id: id1,
             number: '1234.5',
             facility: 'Объект 1',
             quantity: 123,
             area: 100,
         },
         [id2]: {
+            id: id2,
             number: '3456',
             facility: 'Объект 2',
             quantity: 300,
             area: 500,
         },
         [id3]: {
+            id: id3,
             number: '789',
             facility: 'Объект 3',
             quantity: 467,
             area: 425,
         },
         [id4]: {
+            id: id4,
             number: '6754.1',
             facility: 'Объект 4',
             quantity: 10,
@@ -52,7 +56,7 @@ const changeOrder = (state, {payload}) => ({
     ...state,
     ordersById: {
         ...state.ordersById,
-        [payload.orderId]: payload.newOrder
+        [payload.newOrder.id]: payload.newOrder
     }
 });
 

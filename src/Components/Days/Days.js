@@ -1,12 +1,25 @@
 import React from "react";
-import Day from "../../Containers/Day";
+import Day from "../../Components/Day/Day";
 
-export default function Days({orderIdsByDate}) {
-    return (
-        <div className='days'>
-            {Object.keys(orderIdsByDate).map(dateStr => (
-                <Day dateStr={dateStr} key={dateStr} />
-            ))}
-        </div>
-    )
+export default class Days extends React.Component {
+
+    mapOrderIds = (orderIds) => orderIds.map(id => (this.props.ordersById[id]));
+
+    mapDay = ([dateStr, orderIds]) => (
+        <Day dateStr={dateStr}
+             orders={this.mapOrderIds(orderIds)}
+             setOrders={this.props.setOrders}
+             onOrderChange={this.props.onOrderChange}
+             key={dateStr}/>
+    );
+
+    mapDays = () => Object.entries(this.props.orderIdsByDate).map(this.mapDay);
+
+    render() {
+        return (
+            <div className='days'>
+                {this.mapDays()}
+            </div>
+        );
+    }
 }
