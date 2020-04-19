@@ -1,4 +1,4 @@
-import * as actionTypes from '../ActionTypes';
+import * as actionTypes from '../Constants/ActionTypes';
 import {createReducer} from 'redux-create-reducer';
 import {v4 as uuidv4} from "uuid";
 

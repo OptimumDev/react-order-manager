@@ -1,4 +1,4 @@
-import * as actionTypes from '../ActionTypes/index'
+import * as actionTypes from '../Constants/ActionTypes'
 
 
 export const setOrderIds = (newOrderIds, dateStr) => {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Days from "../Components/Days/Days";
-import {changeOrder, setOrderIds} from "../ActionCreators";
+import {changeOrder, setOrderIds} from "../Actions";
 
 export default connect(
     (state, props) => ({

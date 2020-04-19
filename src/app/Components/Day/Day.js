@@ -1,7 +1,7 @@
 import React from "react";
 import './Day.css'
 import {ReactSortable} from "react-sortablejs";
-import Order from '../../Components/Order/Order'
+import Order from '../Order/Order'
 import DayStatistics from "../DayStatistics/DayStatistics";
 
 export default function Day({dateStr, orders, setOrders, onOrderChange}) {
