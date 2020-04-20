@@ -15,6 +15,7 @@ export const defaultState = {
             facility: 'Объект 1',
             quantity: 123,
             area: 100,
+            color: '#ff0000'
         },
         [id2]: {
             id: id2,
@@ -22,6 +23,7 @@ export const defaultState = {
             facility: 'Объект 2',
             quantity: 300,
             area: 500,
+            color: '#00ff00'
         },
         [id3]: {
             id: id3,
@@ -29,6 +31,7 @@ export const defaultState = {
             facility: 'Объект 3',
             quantity: 467,
             area: 425,
+            color: '#0000ff'
         },
         [id4]: {
             id: id4,
@@ -36,6 +39,7 @@ export const defaultState = {
             facility: 'Объект 4',
             quantity: 10,
             area: 23,
+            color: '#ffff00'
         }
     },
     orderIdsByDate: {

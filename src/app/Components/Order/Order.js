@@ -32,7 +32,7 @@ export default class Order extends React.Component {
     render() {
         return (
             <div className='order-container'>
-                <div className='order'>
+                <div className='order-card' style={{borderColor: this.props.order.color}}>
                     <header>
                         <div className='order-icons'/>
                         <div className='order-buttons'>
