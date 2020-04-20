@@ -13,10 +13,6 @@ const fieldNames = {
     area: 'Площадь'
 };
 
-const textOrInput = (isInput, text, onChange) => isInput
-    ? <input type='text' value={text} onChange={e => onChange(e.target.value)}/>
-    : text;
-
 export default class Order extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -62,48 +58,36 @@ export default class Order extends React.Component {
                     </header>
                     <table className='order-data'>
                         <tbody>
-                        <tr>
-                            <th>Номер</th>
-                            <td>
-                                {textOrInput(
-                                    this.state.editing,
-                                    order.number,
-                                    number => onChange({...order, number}))}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Объект</th>
-                            <td>
-                                {textOrInput(
-                                    this.state.editing,
-                                    order.facility,
-                                    facility => onChange({...order, facility}))}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Количество</th>
-                            <td>
-                                {textOrInput(
-                                    this.state.editing,
-                                    order.quantity,
-                                    quantity => onChange({...order, quantity}))}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Площадь</th>
-                            <td>
-                                {textOrInput(
-                                    this.state.editing,
-                                    order.area,
-                                    area => onChange({...order, area}))}
-                            </td>
-                        </tr>
+                        {
+                            Object
+                                .keys(this.props.order)
+                                .filter(k => fieldNames.hasOwnProperty(k))
+                                .map(k => this.createRow(k))
+                        }
                         </tbody>
                     </table>
                 </div>
             </div>
         );
     }
+
+    createRow = key => {
+        return (
+            <tr>
+                <th>{fieldNames[key]}</th>
+                <td>
+                    {
+                        this.state.editing
+                            ? <input
+                                type='text'
+                                value={this.props.order[key]}
+                                onChange={e => this.props.onChange({...this.props.order, [key]: e.target.value})}/>
+                            : this.props.order[key]
+                    }
+                </td>
+            </tr>
+        )
+    };
 
     startEditing = () => {
         this.setState({editing: true});
