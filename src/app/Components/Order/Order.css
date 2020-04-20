@@ -17,6 +17,9 @@
     flex-direction: column;
 
     border-collapse: collapse;
+
+    max-width: 250px;
+    overflow-x: auto;
 }
 
 .order-data td * {
@@ -41,6 +44,15 @@
     text-align: left;
     padding-right: 10px;
     font-weight: 600;
+}
+
+.order-data td {
+    line-height: 18px;
+}
+
+.order-data td input {
+    height: 14px;
+    width: 100px;
 }
 
 .order-buttons button,

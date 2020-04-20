@@ -65,11 +65,12 @@ export default class Order extends React.Component {
         </tr>
     );
 
-    createOrderInput = (type, key) => (
+    createOrderInput = (type, key, tabIndex = 0) => (
         <input
             type={type}
             value={this.props.order[key]}
             onChange={e => this.props.onChange({...this.props.order, [key]: e.target.value})}
+            tabIndex={tabIndex}
         />
     );
 
@@ -83,12 +84,12 @@ export default class Order extends React.Component {
         return this.state.editing &&
             <label className='icon-label'>
                 {this.createIcon(colorsIcon)}
-                {this.createOrderInput('color', 'color')}
+                {this.createOrderInput('color', 'color', -1)}
             </label>
     };
 
     createButton = (icon, handle) => (
-        <button onClick={handle}>
+        <button onClick={handle} tabIndex={-1}>
             {this.createIcon(icon)}
         </button>
     );
