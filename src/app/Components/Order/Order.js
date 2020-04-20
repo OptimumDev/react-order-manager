@@ -13,6 +13,14 @@ const fieldNames = {
     area: 'Площадь'
 };
 
+const iconAlts = {
+    editIcon: '✏️',
+    doneIcon: '✔️',
+    colorsIcon: '🎨',
+    deleteIcon: '🗑️',
+    closeIcon: '❌'
+};
+
 export default class Order extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -22,38 +30,15 @@ export default class Order extends React.Component {
     }
 
     render() {
-        let {order, onChange} = this.props;
-
         return (
             <div className='order-container'>
                 <div className='order'>
                     <header>
                         <div className='order-icons'/>
                         <div className='order-buttons'>
-                            {
-                                this.state.editing &&
-                                <button>
-                                    <img src={colorsIcon} alt='🎨'/>
-                                </button>
-                            }
-                            {
-                                this.state.editing
-                                    ? <button onClick={this.finishEditing}>
-                                        <img src={doneIcon} alt='✔️'/>
-                                    </button>
-                                    : <button onClick={this.startEditing}>
-                                        <img src={editIcon} alt='✏️'/>
-                                    </button>
-                            }
-                            {
-                                this.state.editing
-                                    ? <button onClick={this.cancelEditing}>
-                                        <img src={closeIcon} alt='❌'/>
-                                    </button>
-                                    : <button>
-                                        <img src={deleteIcon} alt='🗑️'/>
-                                    </button>
-                            }
+                            {this.state.editing && this.createButton(colorsIcon)}
+                            {this.createEditingButton(doneIcon, this.finishEditing, editIcon, this.startEditing)}
+                            {this.createEditingButton(closeIcon, this.cancelEditing, deleteIcon)}
                         </div>
                     </header>
                     <table className='order-data'>
@@ -71,23 +56,33 @@ export default class Order extends React.Component {
         );
     }
 
-    createRow = key => {
-        return (
-            <tr>
-                <th>{fieldNames[key]}</th>
-                <td>
-                    {
-                        this.state.editing
-                            ? <input
-                                type='text'
-                                value={this.props.order[key]}
-                                onChange={e => this.props.onChange({...this.props.order, [key]: e.target.value})}/>
-                            : this.props.order[key]
-                    }
-                </td>
-            </tr>
-        )
+    createRow = key => (
+        <tr key={key}>
+            <th>{fieldNames[key]}</th>
+            <td>
+                {
+                    this.state.editing
+                        ? <input
+                            type='text'
+                            value={this.props.order[key]}
+                            onChange={e => this.props.onChange({...this.props.order, [key]: e.target.value})}/>
+                        : this.props.order[key]
+                }
+            </td>
+        </tr>
+    );
+
+    createEditingButton = (editingIcon, editingHandle, standardIcon, standardHandle) => {
+        return this.state.editing
+            ? this.createButton(editingIcon, editingHandle)
+            : this.createButton(standardIcon, standardHandle)
     };
+
+    createButton = (icon, handle) => (
+        <button onClick={handle}>
+            <img src={icon} alt={iconAlts[icon]}/>
+        </button>
+    );
 
     startEditing = () => {
         this.setState({editing: true});

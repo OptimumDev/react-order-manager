@@ -4,7 +4,7 @@
     flex-shrink: 0;
 }
 
-.order {
+.order-card {
     padding: 5px;
 
     border: #e1e4e8 solid 1px;
@@ -24,11 +24,11 @@
     padding: 0;
 }
 
-.order header, .order-data {
+.order-card header, .order-data {
     flex-shrink: 0;
 }
 
-.order header {
+.order-card header {
     display: flex;
     justify-content: space-between;
 }
