@@ -43,7 +43,8 @@
     font-weight: 600;
 }
 
-.order-buttons button {
+.order-buttons button,
+.order-buttons label {
     background-color: transparent;
     outline: none;
     padding: 0;

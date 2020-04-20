@@ -36,7 +36,7 @@ export default class Order extends React.Component {
                     <header>
                         <div className='order-icons'/>
                         <div className='order-buttons'>
-                            {this.state.editing && this.createButton(colorsIcon)}
+                            {this.createColorButton()}
                             {this.createEditingButton(doneIcon, this.finishEditing, editIcon, this.startEditing)}
                             {this.createEditingButton(closeIcon, this.cancelEditing, deleteIcon)}
                         </div>
@@ -60,16 +60,17 @@ export default class Order extends React.Component {
         <tr key={key}>
             <th>{fieldNames[key]}</th>
             <td>
-                {
-                    this.state.editing
-                        ? <input
-                            type='text'
-                            value={this.props.order[key]}
-                            onChange={e => this.props.onChange({...this.props.order, [key]: e.target.value})}/>
-                        : this.props.order[key]
-                }
+                {this.state.editing ? this.createOrderInput('text', key) : this.props.order[key]}
             </td>
         </tr>
+    );
+
+    createOrderInput = (type, key) => (
+        <input
+            type={type}
+            value={this.props.order[key]}
+            onChange={e => this.props.onChange({...this.props.order, [key]: e.target.value})}
+        />
     );
 
     createEditingButton = (editingIcon, editingHandle, standardIcon, standardHandle) => {
@@ -78,10 +79,22 @@ export default class Order extends React.Component {
             : this.createButton(standardIcon, standardHandle)
     };
 
+    createColorButton = () => {
+        return this.state.editing &&
+            <label className='icon-label'>
+                {this.createIcon(colorsIcon)}
+                {this.createOrderInput('color', 'color')}
+            </label>
+    };
+
     createButton = (icon, handle) => (
         <button onClick={handle}>
-            <img src={icon} alt={iconAlts[icon]}/>
+            {this.createIcon(icon)}
         </button>
+    );
+
+    createIcon = icon => (
+        <img src={icon} alt={iconAlts[icon]}/>
     );
 
     startEditing = () => {
