@@ -25,6 +25,10 @@ function App() {
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
+                <header className='app-header'>
+                    <span className='app-name'>Order Manager</span>
+                    {/*<Controls />*/}
+                </header>
                 <div className="App">
                     <Days />
                 </div>

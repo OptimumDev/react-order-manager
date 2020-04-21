@@ -1,5 +1,6 @@
 import React from "react";
 import Day from "../Day/Day";
+import './Days.css'
 
 export default class Days extends React.Component {
 

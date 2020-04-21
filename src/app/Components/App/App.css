@@ -1,3 +1,17 @@
 .icon-label input {
     display: none;
 }
+
+.app-header {
+    background-color: #fafbfc;
+    border-bottom: #e1e4e8 solid 1px;
+    height: 48px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-name {
+    font-size: 24px;
+}
