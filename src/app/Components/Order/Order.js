@@ -25,14 +25,15 @@ export default class Order extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            editing: false
+            editing: false,
+            order: props.order
         }
     }
 
     render() {
         return (
             <div className='order-container'>
-                <div className='order-card' style={{borderColor: this.props.order.color}}>
+                <div className='order-card' style={{borderColor: this.state.order.color}}>
                     <header>
                         <div className='order-icons'/>
                         <div className='order-buttons'>
@@ -45,7 +46,7 @@ export default class Order extends React.Component {
                         <tbody>
                         {
                             Object
-                                .keys(this.props.order)
+                                .keys(this.state.order)
                                 .filter(k => fieldNames.hasOwnProperty(k))
                                 .map(k => this.createRow(k))
                         }
@@ -60,7 +61,7 @@ export default class Order extends React.Component {
         <tr key={key}>
             <th>{fieldNames[key]}</th>
             <td>
-                {this.state.editing ? this.createOrderInput('text', key) : this.props.order[key]}
+                {this.state.editing ? this.createOrderInput('text', key) : this.state.order[key]}
             </td>
         </tr>
     );
@@ -68,11 +69,13 @@ export default class Order extends React.Component {
     createOrderInput = (type, key, tabIndex = 0) => (
         <input
             type={type}
-            value={this.props.order[key]}
-            onChange={e => this.props.onChange({...this.props.order, [key]: e.target.value})}
+            value={this.state.order[key]}
+            onChange={e => this.updateOrder(key, e.target.value)}
             tabIndex={tabIndex}
         />
     );
+
+    updateOrder = (key, value) => this.setState({order: {...this.state.order, [key]: value}});
 
     createEditingButton = (editingIcon, editingHandle, standardIcon, standardHandle) => {
         return this.state.editing
@@ -104,9 +107,13 @@ export default class Order extends React.Component {
 
     finishEditing = () => {
         this.setState({editing: false});
+        this.props.onChange(this.state.order);
     };
 
     cancelEditing = () => {
-        this.setState({editing: false});
+        this.setState({
+            editing: false,
+            order: this.props.order
+        });
     };
 }
