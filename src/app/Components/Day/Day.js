@@ -18,6 +18,8 @@ export default function Day({dateStr, orders, setOrders, onOrderChange}) {
                     animation={300}
                     list={orders}
                     setList={os => setOrders(os, dateStr)}
+                    filter='.editing'
+                    preventOnFilter={false}
                 >
                     {orders.map(order =>
                         <Order order={order} onChange={onOrderChange} key={order.id}/>
