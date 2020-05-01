@@ -5,10 +5,11 @@ import logger from 'redux-logger';
 import {Provider} from "react-redux";
 import {rootReducer} from "../../Reducers";
 import Days from "../../Containers/Days";
+import Controls from "../Controls/Controls";
 
-import { persistStore, persistReducer } from 'redux-persist'
+import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { PersistGate } from 'redux-persist/lib/integration/react';
+import {PersistGate} from 'redux-persist/lib/integration/react';
 
 const persistConfig = {
     key: 'root',
@@ -25,12 +26,12 @@ function App() {
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <header className='app-header'>
-                    <span className='app-name'>Order Manager</span>
-                    {/*<Controls />*/}
-                </header>
-                <div className="App">
-                    <Days />
+                <div className="app">
+                    <header className='app-header'>
+                        <span className='app-name'>Order Manager</span>
+                        <Controls/>
+                    </header>
+                    <Days/>
                 </div>
             </PersistGate>
         </Provider>

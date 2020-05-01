@@ -1,0 +1,14 @@
+.controls button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+.controls button:active {
+    opacity: 0.5;
+}
+
+.controls button:hover {
+    opacity: 0.7;
+}

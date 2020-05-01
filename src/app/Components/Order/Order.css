@@ -67,3 +67,7 @@
 .order-buttons button:active {
     opacity: 0.5;
 }
+
+.order-buttons button:hover {
+    opacity: 0.7;
+}
