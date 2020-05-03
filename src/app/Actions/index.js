@@ -20,3 +20,13 @@ export const changeOrder = newOrder => {
         }
     }
 };
+
+export const createOrder = (order, dateStr) => {
+    return {
+        type: actionTypes.CREATE_ORDER,
+        payload: {
+            dateStr,
+            order
+        }
+    }
+};

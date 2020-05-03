@@ -5,13 +5,7 @@ import doneIcon from '../../../images/done-24px.svg'
 import colorsIcon from '../../../images/color_lens-24px.svg'
 import deleteIcon from '../../../images/delete_forever-24px.svg'
 import closeIcon from '../../../images/close-24px.svg'
-
-const fieldNames = {
-    number: 'Номер',
-    facility: 'Объект',
-    quantity: 'Колличество',
-    area: 'Площадь'
-};
+import {fieldNames} from "../../Constants/OrderFieldNames";
 
 const iconAlts = {
     editIcon: '✏️',

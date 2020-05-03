@@ -5,7 +5,7 @@ import logger from 'redux-logger';
 import {Provider} from "react-redux";
 import {rootReducer} from "../../Reducers";
 import Days from "../../Containers/Days";
-import Controls from "../Controls/Controls";
+import Controls from "../../Containers/Controls";
 
 import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'

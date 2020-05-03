@@ -64,7 +64,20 @@ const changeOrder = (state, {payload}) => ({
     }
 });
 
+const createOrder = (state, {payload}) => ({
+    ...state,
+    ordersById: {
+        ...state.ordersById,
+        [payload.order.id]: payload.order
+    },
+    orderIdsByDate: {
+        ...state.orderIdsByDate,
+        [payload.dateStr]: state.orderIdsByDate[payload.dateStr].concat(payload.order.id)
+    }
+});
+
 export const rootReducer = createReducer(defaultState, {
     [actionTypes.SET_ORDER_IDS]: setOrderIds,
     [actionTypes.CHANGE_ORDER]: changeOrder,
+    [actionTypes.CREATE_ORDER]: createOrder,
 });
