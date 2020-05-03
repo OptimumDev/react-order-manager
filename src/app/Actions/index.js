@@ -30,3 +30,13 @@ export const createOrder = (order, dateStr) => {
         }
     }
 };
+
+export const deleteOrder = (orderId, dateStr) => {
+    return {
+        type: actionTypes.DELETE_ORDER,
+        payload: {
+            orderId,
+            dateStr
+        }
+    }
+};

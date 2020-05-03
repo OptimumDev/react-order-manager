@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Days from "../Components/Days/Days";
-import {changeOrder, setOrderIds} from "../Actions";
+import {changeOrder, deleteOrder, setOrderIds} from "../Actions";
 
 export default connect(
     (state, props) => ({
@@ -9,6 +9,7 @@ export default connect(
     }),
     (dispatch, props) => ({
         setOrders: (orders, dateStr) => dispatch(setOrderIds(orders.map(o => o.id), dateStr)),
-        onOrderChange: newOrder => dispatch(changeOrder(newOrder))
+        onOrderChange: newOrder => dispatch(changeOrder(newOrder)),
+        onOrderDelete: (orderId, dateStr) => dispatch(deleteOrder(orderId, dateStr))
     })
 )(Days);

@@ -11,6 +11,7 @@ export default class Days extends React.Component {
              orders={this.mapOrderIds(orderIds)}
              setOrders={this.props.setOrders}
              onOrderChange={this.props.onOrderChange}
+             onOrderDelete={orderId => this.props.onOrderDelete(orderId, dateStr)}
              key={dateStr}/>
     );
 

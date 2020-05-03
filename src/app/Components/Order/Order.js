@@ -33,7 +33,7 @@ export default class Order extends React.Component {
                         <div className='order-buttons'>
                             {this.createColorButton()}
                             {this.createEditingButton(doneIcon, this.finishEditing, editIcon, this.startEditing)}
-                            {this.createEditingButton(closeIcon, this.cancelEditing, deleteIcon)}
+                            {this.createEditingButton(closeIcon, this.cancelEditing, deleteIcon, this.delete)}
                         </div>
                     </header>
                     <table className='order-data'>
@@ -110,4 +110,8 @@ export default class Order extends React.Component {
             order: this.props.order
         });
     };
+
+    delete = () => {
+        this.props.onDelete(this.state.order.id);
+    }
 }

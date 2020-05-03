@@ -76,8 +76,22 @@ const createOrder = (state, {payload}) => ({
     }
 });
 
+const deleteOrder = (state, {payload}) => {
+    console.log(payload);
+    const {[payload.orderId]: _, ...newOrdersById} = state.ordersById;
+    return {
+        ...state,
+        ordersById: newOrdersById,
+        orderIdsByDate: {
+            ...state.orderIdsByDate,
+            [payload.dateStr]: state.orderIdsByDate[payload.dateStr].filter(id => id !== payload.orderId)
+        }
+    }
+};
+
 export const rootReducer = createReducer(defaultState, {
     [actionTypes.SET_ORDER_IDS]: setOrderIds,
     [actionTypes.CHANGE_ORDER]: changeOrder,
     [actionTypes.CREATE_ORDER]: createOrder,
+    [actionTypes.DELETE_ORDER]: deleteOrder,
 });
