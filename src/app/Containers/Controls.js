@@ -19,6 +19,5 @@ const formatDate = date => {
     const month = monthNumber < 10 ? '0' + monthNumber : monthNumber;
     const day = dayNumber < 10 ? '0' + dayNumber : dayNumber;
 
-    console.log([year, month, day].join('-'));
     return [year, month, day].join('-');
 };

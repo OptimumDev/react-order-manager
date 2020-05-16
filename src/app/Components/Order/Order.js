@@ -6,7 +6,7 @@ import colorsIcon from '../../../images/color_lens-24px.svg'
 import deleteIcon from '../../../images/delete_forever-24px.svg'
 import closeIcon from '../../../images/close-24px.svg'
 import {fieldNames} from "../../Constants/OrderFieldNames";
-import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
+import ConfirmationDialog from "../Dialogs/ConfirmationDialog/ConfirmationDialog";
 
 const iconAlts = {
     editIcon: '✏️',
