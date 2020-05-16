@@ -64,20 +64,23 @@ const changeOrder = (state, {payload}) => ({
     }
 });
 
-const createOrder = (state, {payload}) => ({
-    ...state,
-    ordersById: {
-        ...state.ordersById,
-        [payload.order.id]: payload.order
-    },
-    orderIdsByDate: {
-        ...state.orderIdsByDate,
-        [payload.dateStr]: state.orderIdsByDate[payload.dateStr].concat(payload.order.id)
-    }
-});
+const createOrder = (state, {payload}) => {
+    const id = uuidv4();
+
+    return {
+        ...state,
+        ordersById: {
+            ...state.ordersById,
+            [id]: {...payload.order, id}
+        },
+        orderIdsByDate: {
+            ...state.orderIdsByDate,
+            [payload.dateStr]: state.orderIdsByDate[payload.dateStr].concat(id)
+        }
+    };
+};
 
 const deleteOrder = (state, {payload}) => {
-    console.log(payload);
     const {[payload.orderId]: _, ...newOrdersById} = state.ordersById;
     return {
         ...state,
