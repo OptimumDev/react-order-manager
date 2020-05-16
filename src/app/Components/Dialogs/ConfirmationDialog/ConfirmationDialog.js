@@ -4,7 +4,7 @@ import {Modal, Button} from "@skbkontur/react-ui";
 
 export default function ConfirmationDialog({isShown, onCancel, onAccept, children}) {
     return isShown && (
-        <Modal onClose={onCancel}>
+        <Modal noClose={true}>
             <Modal.Header>{children}</Modal.Header>
             <Modal.Footer>
                 <div className='confirmation-buttons'>
