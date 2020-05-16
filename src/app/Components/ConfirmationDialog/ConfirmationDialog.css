@@ -1,0 +1,9 @@
+.confirmation-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.confirmation-buttons > * {
+    margin-left: 10px;
+}

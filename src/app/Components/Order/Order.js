@@ -6,6 +6,7 @@ import colorsIcon from '../../../images/color_lens-24px.svg'
 import deleteIcon from '../../../images/delete_forever-24px.svg'
 import closeIcon from '../../../images/close-24px.svg'
 import {fieldNames} from "../../Constants/OrderFieldNames";
+import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 
 const iconAlts = {
     editIcon: '✏️',
@@ -20,7 +21,8 @@ export default class Order extends React.Component {
         super(props, context);
         this.state = {
             editing: false,
-            order: props.order
+            order: props.order,
+            confirmationDialogShown: false
         }
     }
 
@@ -33,7 +35,10 @@ export default class Order extends React.Component {
                         <div className='order-buttons'>
                             {this.createColorButton()}
                             {this.createEditingButton(doneIcon, this.finishEditing, editIcon, this.startEditing)}
-                            {this.createEditingButton(closeIcon, this.cancelEditing, deleteIcon, this.delete)}
+                            {this.createEditingButton(
+                                closeIcon, this.cancelEditing,
+                                deleteIcon, this.toggleConfirmationDialog
+                            )}
                         </div>
                     </header>
                     <table className='order-data'>
@@ -46,6 +51,13 @@ export default class Order extends React.Component {
                         }
                         </tbody>
                     </table>
+                    <ConfirmationDialog
+                        isShown={this.state.confirmationDialogShown}
+                        onCancel={this.toggleConfirmationDialog}
+                        onAccept={this.delete}
+                    >
+                        Удалить заказ {this.state.order.number}?
+                    </ConfirmationDialog>
                 </div>
             </div>
         );
@@ -110,6 +122,10 @@ export default class Order extends React.Component {
             order: this.props.order
         });
     };
+
+    toggleConfirmationDialog = () => this.setState({
+        confirmationDialogShown: !this.state.confirmationDialogShown
+    });
 
     delete = () => {
         this.props.onDelete(this.state.order.id);
