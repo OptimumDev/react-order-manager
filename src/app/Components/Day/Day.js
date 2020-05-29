@@ -4,12 +4,11 @@ import {ReactSortable} from "react-sortablejs";
 import Order from '../Order/Order'
 import DayStatistics from "../DayStatistics/DayStatistics";
 
-export default function Day({dateStr, orders, setOrders, onOrderChange, onOrderDelete}) {
+export default function Day({date, orders, setOrders, onOrderChange, onOrderDelete}) {
     return (
         <div className='day'>
             <div className='date'>
-                {new Date(dateStr)
-                    .toLocaleDateString('ru-RU', {year: 'numeric', month: 'long', day: 'numeric'})}
+                {date.toLocaleDateString('ru-RU', {year: 'numeric', month: 'long', day: 'numeric'})}
             </div>
             <div className='day-data'>
                 <ReactSortable
@@ -17,7 +16,7 @@ export default function Day({dateStr, orders, setOrders, onOrderChange, onOrderD
                     group='orders'
                     animation={300}
                     list={orders}
-                    setList={os => setOrders(os, dateStr)}
+                    setList={os => setOrders(os, date)}
                     filter='.editing'
                     preventOnFilter={false}
                 >

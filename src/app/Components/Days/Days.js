@@ -1,27 +1,26 @@
 import React from "react";
-import Day from "../Day/Day";
 import './Days.css'
+import Day from "../Day/Day";
 
 export default class Days extends React.Component {
-
-    mapOrderIds = (orderIds) => orderIds.map(id => (this.props.ordersById[id]));
-
-    mapDay = ([dateStr, orderIds]) => (
-        <Day dateStr={dateStr}
-             orders={this.mapOrderIds(orderIds)}
-             setOrders={this.props.setOrders}
-             onOrderChange={this.props.onOrderChange}
-             onOrderDelete={orderId => this.props.onOrderDelete(orderId, dateStr)}
-             key={dateStr}/>
-    );
-
-    mapDays = () => Object.entries(this.props.orderIdsByDate).map(this.mapDay);
-
     render() {
         return (
             <div className='days'>
-                {this.mapDays()}
+                {Array.from(this.props.orderIdsByDate).map(this.mapDay)}
             </div>
         );
     }
+
+    mapOrderIds = (orderIds) => orderIds.map(id => (this.props.ordersById[id]));
+
+    mapDay = ([date, orderIds]) => (
+        <Day
+            date={date}
+            orders={this.mapOrderIds(orderIds)}
+            setOrders={this.props.setOrders}
+            onOrderChange={this.props.onOrderChange}
+            onOrderDelete={orderId => this.props.onOrderDelete(orderId, date)}
+            key={date.toString()}
+        />
+    );
 }

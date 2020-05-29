@@ -8,20 +8,9 @@ export default connect(
         ordersById: state.ordersById
     }),
     (dispatch, props) => ({
-        setOrders: (orders, dateStr) => dispatch(setOrderIds(orders.map(o => o.id), dateStr)),
-        onOrderCreate: (order, date) => dispatch(createOrder(order, formatDate(date))),
-        onOrderChange: newOrder => dispatch(changeOrder(newOrder)),
-        onOrderDelete: (orderId, dateStr) => dispatch(deleteOrder(orderId, dateStr))
+        setOrders: (orders, date) => dispatch(setOrderIds(orders.map(o => o.id), date)),
+        onOrderCreate: order => dispatch(createOrder(order)),
+        onOrderChange: order => dispatch(changeOrder(order)),
+        onOrderDelete: order => dispatch(deleteOrder(order))
     })
 )(Main);
-
-const formatDate = date => {
-    const monthNumber = date.getMonth() + 1;
-    const dayNumber = date.getDate();
-
-    const year = date.getFullYear();
-    const month = monthNumber < 10 ? '0' + monthNumber : monthNumber;
-    const day = dayNumber < 10 ? '0' + dayNumber : dayNumber;
-
-    return [year, month, day].join('-');
-};

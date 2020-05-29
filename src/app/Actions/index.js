@@ -1,42 +1,39 @@
 import * as actionTypes from '../Constants/ActionTypes'
 
 
-export const setOrderIds = (newOrderIds, dateStr) => {
+export const setOrderIds = (orderIds, date) => {
     return {
         type: actionTypes.SET_ORDER_IDS,
         payload: {
-            newOrderIds,
-            dateStr
+            orderIds,
+            date
         }
     }
 };
 
-export const changeOrder = newOrder => {
+export const changeOrder = order => {
     return {
         type: actionTypes.CHANGE_ORDER,
         payload: {
-            orderId: newOrder.id,
-            newOrder
-        }
-    }
-};
-
-export const createOrder = (order, dateStr) => {
-    return {
-        type: actionTypes.CREATE_ORDER,
-        payload: {
-            dateStr,
             order
         }
     }
 };
 
-export const deleteOrder = (orderId, dateStr) => {
+export const createOrder = (order) => {
+    return {
+        type: actionTypes.CREATE_ORDER,
+        payload: {
+            order
+        }
+    }
+};
+
+export const deleteOrder = order => {
     return {
         type: actionTypes.DELETE_ORDER,
         payload: {
-            orderId,
-            dateStr
+            order
         }
     }
 };

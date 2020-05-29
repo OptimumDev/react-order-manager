@@ -130,6 +130,6 @@ export default class Order extends React.Component {
     });
 
     delete = () => {
-        this.props.onDelete(this.state.order.id);
+        this.props.onDelete(this.state.order);
     }
 }
