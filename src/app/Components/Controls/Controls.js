@@ -19,12 +19,14 @@ export default class Controls extends React.Component {
                 <button onClick={this.toggleCreateDialog}>
                     <img src={createIcon} alt='+' draggable={false}/>
                 </button>
-                <CreateDialog
-                    isShown={this.state.createDialogShown}
-                    onClose={this.toggleCreateDialog}
-                    onCreate={this.props.onOrderCreate}
-                    datesToCreate={this.props.datesToCreate}
-                />
+                {
+                    this.state.createDialogShown &&
+                    <CreateDialog
+                        onClose={this.toggleCreateDialog}
+                        onCreate={this.props.onOrderCreate}
+                        datesToCreate={this.props.datesToCreate}
+                    />
+                }
             </div>
         );
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import './CreateDialog.css';
-import {Modal} from "@skbkontur/react-ui";
+import {Modal, Button} from "@skbkontur/react-ui";
 import {fieldNames} from "../../../Constants/OrderFieldNames";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,31 +24,28 @@ export default class CreateDialog extends React.Component {
     }
 
     render() {
-        const {isShown, onClose} = this.props;
+        const {onClose} = this.props;
 
-        return isShown && (
+        return (
             <Modal onClose={onClose}>
                 <Modal.Header>Создать новый заказ</Modal.Header>
+                <form onSubmit={this.create}>
                 <Modal.Body>
-                    <form id='create-form' className='order-creation-inputs' onSubmit={this.create}>
+                    <div className='order-creation-inputs' >
                         {this.createInput(fieldNames.number, 'number', 'text')}
                         {this.createInput(fieldNames.facility, 'facility', 'text')}
                         {this.createInput(fieldNames.quantity, 'quantity', 'number')}
                         {this.createInput(fieldNames.area, 'area', 'number')}
                         {this.createDateInput()}
                         {this.createInput('Цвет', 'color', 'color')}
-                    </form>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <div className='order-creation-footer'>
-                        <input
-                            className='create-button'
-                            type='submit'
-                            form='create-form'
-                            value='Создать'
-                        />
+                        <Button use='primary' type="submit">Создать</Button>
                     </div>
                 </Modal.Footer>
+                </form>
             </Modal>
         );
     }

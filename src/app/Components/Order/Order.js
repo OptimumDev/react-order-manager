@@ -51,13 +51,15 @@ export default class Order extends React.Component {
                         }
                         </tbody>
                     </table>
-                    <ConfirmationDialog
-                        isShown={this.state.confirmationDialogShown}
-                        onCancel={this.toggleConfirmationDialog}
-                        onAccept={this.delete}
-                    >
-                        Удалить заказ {this.state.order.number}?
-                    </ConfirmationDialog>
+                    {
+                        this.state.confirmationDialogShown &&
+                        <ConfirmationDialog
+                            onCancel={this.toggleConfirmationDialog}
+                            onAccept={this.delete}
+                        >
+                            Удалить заказ {this.state.order.number}?
+                        </ConfirmationDialog>
+                    }
                 </div>
             </div>
         );
