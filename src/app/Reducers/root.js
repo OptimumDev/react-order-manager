@@ -50,6 +50,7 @@ export const defaultState = {
             date: tomorrow
         }
     },
+    // TODO change for Immutable.Map
     orderIdsByDate: new Map([
         [today, [id1, id2]],
         [tomorrow, [id3, id4]]

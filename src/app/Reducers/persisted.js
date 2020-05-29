@@ -12,7 +12,7 @@ const ordersByIdTransformer = config => createTransform(
     ordersById => JSON.stringify(ordersById),
     str => {
         const ordersById = JSON.parse(str);
-        for (const order of ordersById)
+        for (const order of Object.values(ordersById))
             order.date = new Date(order.date)
         return ordersById;
     },
