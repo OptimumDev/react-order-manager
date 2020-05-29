@@ -22,7 +22,7 @@ export default class Controls extends React.Component {
                 <CreateDialog
                     isShown={this.state.createDialogShown}
                     onClose={this.toggleCreateDialog}
-                    onCreate={this.props.onCreate}
+                    onCreate={this.props.onOrderCreate}
                     datesToCreate={this.props.datesToCreate}
                 />
             </div>
