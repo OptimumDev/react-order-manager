@@ -1,6 +1,7 @@
 import * as actionTypes from '../Constants/ActionTypes';
 import {createReducer} from 'redux-create-reducer';
 import {v4 as uuidv4} from "uuid";
+import {orderBy, partition} from "../Utils/arrayHelper";
 
 const id1 = uuidv4();
 const id2 = uuidv4();
@@ -20,7 +21,7 @@ export const defaultState = {
             quantity: 123,
             area: 100,
             color: '#ff0000',
-            date: today
+            date: today.toString()
         },
         [id2]: {
             id: id2,
@@ -29,7 +30,7 @@ export const defaultState = {
             quantity: 300,
             area: 500,
             color: '#00ff00',
-            date: today
+            date: today.toString()
         },
         [id3]: {
             id: id3,
@@ -38,7 +39,7 @@ export const defaultState = {
             quantity: 467,
             area: 425,
             color: '#0000ff',
-            date: tomorrow
+            date: tomorrow.toString()
         },
         [id4]: {
             id: id4,
@@ -47,7 +48,7 @@ export const defaultState = {
             quantity: 10,
             area: 23,
             color: '#ffff00',
-            date: tomorrow
+            date: tomorrow.toString()
         }
     },
     orderIdsByDate: {
@@ -117,9 +118,57 @@ const deleteOrder = (state, {payload}) => {
     }
 };
 
+const DAYS_COUNT = 7 * 4;
+
+const orderDays = orderIdsByDate => {
+    const toOrder = Object
+        .entries(orderIdsByDate)
+        .map(([date, ids]) => ({date: new Date(date), ids}));
+
+    return orderBy(toOrder, x => x.date);
+};
+
+const shiftDays = (passed, current, newState) => {
+    const first = current[0]
+
+    for (const {ids} of passed) {
+        for (const id of ids)
+            newState.ordersById[id].date = first.date.toString();
+        first.ids.push(...ids);
+    }
+};
+
+const addNewDays = current => {
+    const first = current[0]
+
+    for (let i = current.length; i < DAYS_COUNT; i++) {
+        const date = new Date(first.date);
+        date.setDate(date.getDate() + i);
+        current.push({date,  ids: []});
+    }
+};
+
+const updateDays = state => {
+    const now = new Date();
+    const newState = {...state};
+
+    const orderedDates = orderDays(state.orderIdsByDate);
+    const [passed, current] = partition(orderedDates, x => x.date < now);
+    shiftDays(passed, current, newState);
+    addNewDays(current);
+
+    newState.orderIdsByDate = current.reduce((acc, {date, ids}) => {
+        acc[date] = ids;
+        return acc;
+    }, {});
+
+    return newState;
+};
+
 export const rootReducer = createReducer(defaultState, {
     [actionTypes.SET_ORDER_IDS]: setOrderIds,
     [actionTypes.CHANGE_ORDER]: changeOrder,
     [actionTypes.CREATE_ORDER]: createOrder,
     [actionTypes.DELETE_ORDER]: deleteOrder,
+    [actionTypes.UPDATE_DAYS]: updateDays,
 });

@@ -52,7 +52,7 @@ export default class CreateDialog extends React.Component {
 
     create = e => {
         e.preventDefault();
-        this.props.onCreate({...this.order, date: this.state.orderDate});
+        this.props.onCreate({...this.order, date: this.state.orderDate.toString()});
         this.props.onClose();
     };
 

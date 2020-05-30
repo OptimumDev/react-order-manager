@@ -3,10 +3,11 @@ import './Main.css';
 import Days from "../Days/Days";
 import Controls from "../Controls/Controls";
 
-const DAYS_COUNT = 7 * 4;
 
 export default class Main extends React.Component {
     componentDidMount() {
+        this.props.updateDays();
+        this.updateDaysInterval = setInterval(this.props.updateDays, 60 * 1000);
     }
 
     render() {
@@ -33,5 +34,9 @@ export default class Main extends React.Component {
                 />
             </div>
         );
+    }
+
+    componentWillUnmount() {
+        this.updateDaysInterval && clearInterval(this.updateDaysInterval)
     }
 }
