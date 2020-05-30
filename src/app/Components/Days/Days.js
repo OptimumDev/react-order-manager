@@ -6,7 +6,7 @@ export default class Days extends React.Component {
     render() {
         return (
             <div className='days'>
-                {Array.from(this.props.orderIdsByDate).map(this.mapDay)}
+                {Object.entries(this.props.orderIdsByDate).map(this.mapDay)}
             </div>
         );
     }

@@ -8,7 +8,8 @@ export default function Day({date, orders, setOrders, onOrderChange, onOrderDele
     return (
         <div className='day'>
             <div className='date'>
-                {date.toLocaleDateString('ru-RU', {year: 'numeric', month: 'long', day: 'numeric'})}
+                {new Date(date)
+                    .toLocaleDateString('ru-RU', {year: 'numeric', month: 'long', day: 'numeric'})}
             </div>
             <div className='day-data'>
                 <ReactSortable

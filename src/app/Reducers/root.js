@@ -50,19 +50,18 @@ export const defaultState = {
             date: tomorrow
         }
     },
-    // TODO change for Immutable.Map
-    orderIdsByDate: new Map([
-        [today, [id1, id2]],
-        [tomorrow, [id3, id4]]
-    ])
+    orderIdsByDate: {
+        [today]: [id1, id2],
+        [tomorrow]: [id3, id4]
+    }
 };
 
 const setOrderIds = (state, {payload}) => ({
     ...state,
-    orderIdsByDate: new Map([
+    orderIdsByDate: {
         ...state.orderIdsByDate,
-        [payload.date, payload.orderIds]
-    ])
+        [payload.date]: payload.orderIds
+    }
 });
 
 const changeOrder = (state, {payload}) => {
@@ -79,11 +78,11 @@ const changeOrder = (state, {payload}) => {
     };
 
     if (payload.order.date !== oldOrder.date) {
-        newState.orderIdsByDate = new Map([
+        newState.orderIdsByDate = {
             ...state.orderIdsByDate,
-            [oldOrder.date, state.orderIdsByDate.get(oldOrder.date).filter(i => i !== id)],
-            [date, state.orderIdsByDate.get(date).concat(id)]
-        ]);
+            [oldOrder.date]: state.orderIdsByDate[oldOrder.date].filter(i => i !== id),
+            [date]: state.orderIdsByDate[date].concat(id)
+        };
     }
 
     return newState;
@@ -98,10 +97,10 @@ const createOrder = (state, {payload}) => {
             ...state.ordersById,
             [id]: {...payload.order, id}
         },
-        orderIdsByDate: new Map([
+        orderIdsByDate: {
             ...state.orderIdsByDate,
-            [payload.order.date, state.orderIdsByDate.get(payload.order.date).concat(id)]
-        ])
+            [payload.order.date]: state.orderIdsByDate[payload.order.date].concat(id)
+        }
     };
 };
 
@@ -111,10 +110,10 @@ const deleteOrder = (state, {payload}) => {
     return {
         ...state,
         ordersById: newOrdersById,
-        orderIdsByDate: new Map([
+        orderIdsByDate: {
             ...state.orderIdsByDate,
-            [order.date, state.orderIdsByDate.get(order.date).filter(id => id !== order.id)]
-        ])
+            [order.date]: state.orderIdsByDate[order.date].filter(id => id !== order.id)
+        }
     }
 };
 

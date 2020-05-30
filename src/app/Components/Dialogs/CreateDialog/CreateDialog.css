@@ -30,11 +30,3 @@
     display: flex;
     justify-content: center;
 }
-
-.order-creation-footer .create-button {
-    border-radius: 5px;
-    font-size: 20px;
-    width: 120px;
-    height: 30px;
-    outline: none;
-}
