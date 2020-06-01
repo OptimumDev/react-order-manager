@@ -3,14 +3,12 @@ import './Day.css'
 import {ReactSortable} from "react-sortablejs";
 import Order from '../Order/Order'
 import DayStatistics from "../DayStatistics/DayStatistics";
+import DateComponent from "../DateComponent/DateComponent";
 
 export default function Day({date, orders, setOrders, onOrderChange, onOrderDelete}) {
     return (
         <div className='day'>
-            <div className='date'>
-                {new Date(date)
-                    .toLocaleDateString('ru-RU', {day: 'numeric', month: 'long', weekday: 'short'})}
-            </div>
+            <DateComponent date={date}/>
             <div className='day-data'>
                 <ReactSortable
                     className='orders'

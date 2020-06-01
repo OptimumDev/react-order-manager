@@ -7,17 +7,6 @@
     background-color: #eff1f3;
 }
 
-.date {
-    display: inline-block;
-    position: relative;
-    z-index: 2;
-    border-radius: 10px 10px 0 0;
-    border-bottom: none;
-    padding: 5px 10px 1px;
-    margin-bottom: -1px;
-    font-weight: 600;
-}
-
 .orders {
     min-height: 10px;
     overflow-x: auto;
