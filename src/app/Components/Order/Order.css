@@ -22,52 +22,11 @@
     overflow-x: auto;
 }
 
-.order-data td * {
-    font-size: 16px;
-    padding: 0;
-}
-
-.order-card header, .order-data {
+.order-card header {
     flex-shrink: 0;
 }
 
 .order-card header {
     display: flex;
     justify-content: space-between;
-}
-
-.order-data {
-    margin: 0 10px 10px;
-}
-
-.order-data th {
-    text-align: left;
-    padding-right: 10px;
-    font-weight: 600;
-}
-
-.order-data td {
-    line-height: 18px;
-}
-
-.order-data td input {
-    height: 14px;
-    width: 100px;
-}
-
-.order-buttons button,
-.order-buttons label {
-    background-color: transparent;
-    outline: none;
-    padding: 0;
-    margin-left: 5px;
-    border: none;
-}
-
-.order-buttons button:active {
-    opacity: 0.5;
-}
-
-.order-buttons button:hover {
-    opacity: 0.7;
 }

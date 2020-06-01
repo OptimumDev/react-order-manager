@@ -1,62 +1,41 @@
 import React from "react";
 import './Order.css'
-import editIcon from '../../../images/edit-24px.svg'
-import doneIcon from '../../../images/done-24px.svg'
-import colorsIcon from '../../../images/color_lens-24px.svg'
-import deleteIcon from '../../../images/delete_forever-24px.svg'
-import closeIcon from '../../../images/close-24px.svg'
-import {fieldNames} from "../../Constants/OrderFieldNames";
 import ConfirmationDialog from "../Dialogs/ConfirmationDialog/ConfirmationDialog";
-
-const iconAlts = {
-    editIcon: '✏️',
-    doneIcon: '✔️',
-    colorsIcon: '🎨',
-    deleteIcon: '🗑️',
-    closeIcon: '❌'
-};
+import OrderData from "../OrderData/OrderData";
+import OrderButtons from "../OrderButtons/OrderButtons";
 
 export default class Order extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            editing: false,
+            isEditing: false,
             order: props.order,
             confirmationDialogShown: false
         }
     }
 
     render() {
+        const {isEditing, order} = this.state;
+
         return (
-            <div className={`order-container` + (this.state.editing ? ' editing' : '')}>
-                <div className='order-card' style={{borderColor: this.state.order.color}}>
+            <div className={`order-container` + (isEditing ? ' editing' : '')}>
+                <div className='order-card' style={{borderColor: order.color}}>
                     <header>
+                        {/* ↓ для пометки "Важное" и тп */}
                         <div className='order-icons'/>
-                        <div className='order-buttons'>
-                            {this.createColorButton()}
-                            {this.createEditingButton(doneIcon, this.finishEditing, editIcon, this.startEditing)}
-                            {this.createEditingButton(
-                                closeIcon, this.cancelEditing,
-                                deleteIcon, this.toggleConfirmationDialog
-                            )}
-                        </div>
+                        <OrderButtons
+                            order={order}
+                            isEditing={isEditing}
+                            onStartEditing={this.startEditing}
+                            onFinishEditing={this.finishEditing}
+                            onCancelEditing={this.cancelEditing}
+                            onDelete={this.toggleDialog}
+                        />
                     </header>
-                    <table className='order-data'>
-                        <tbody>
-                        {
-                            Object
-                                .keys(this.state.order)
-                                .filter(k => fieldNames.hasOwnProperty(k))
-                                .map(k => this.createRow(k))
-                        }
-                        </tbody>
-                    </table>
+                    <OrderData order={order} isEditing={isEditing} onUpdate={this.updateOrder}/>
                     {
                         this.state.confirmationDialogShown &&
-                        <ConfirmationDialog
-                            onCancel={this.toggleConfirmationDialog}
-                            onAccept={this.delete}
-                        >
+                        <ConfirmationDialog onCancel={this.toggleDialog} onAccept={this.delete}>
                             Удалить заказ {this.state.order.number}?
                         </ConfirmationDialog>
                     }
@@ -65,71 +44,29 @@ export default class Order extends React.Component {
         );
     }
 
-    createRow = key => (
-        <tr key={key}>
-            <th>{fieldNames[key]}</th>
-            <td>
-                {this.state.editing ? this.createOrderInput('text', key) : this.state.order[key]}
-            </td>
-        </tr>
-    );
-
-    createOrderInput = (type, key, tabIndex = 0) => (
-        <input
-            type={type}
-            value={this.state.order[key]}
-            onChange={e => this.updateOrder(key, e.target.value)}
-            tabIndex={tabIndex}
-        />
-    );
-
-    updateOrder = (key, value) => this.setState({order: {...this.state.order, [key]: value}});
-
-    createEditingButton = (editingIcon, editingHandle, standardIcon, standardHandle) => {
-        return this.state.editing
-            ? this.createButton(editingIcon, editingHandle)
-            : this.createButton(standardIcon, standardHandle)
-    };
-
-    createColorButton = () => {
-        return this.state.editing &&
-            <label className='icon-label'>
-                {this.createIcon(colorsIcon)}
-                {this.createOrderInput('color', 'color', -1)}
-            </label>
-    };
-
-    createButton = (icon, handle) => (
-        <button onClick={handle} tabIndex={-1}>
-            {this.createIcon(icon)}
-        </button>
-    );
-
-    createIcon = icon => (
-        <img src={icon} alt={iconAlts[icon]}/>
-    );
+    updateOrder = order => this.setState({order});
 
     startEditing = () => {
-        this.setState({editing: true});
+        this.setState({isEditing: true});
     };
 
     finishEditing = () => {
-        this.setState({editing: false});
+        this.setState({isEditing: false});
         this.props.onChange(this.state.order);
     };
 
     cancelEditing = () => {
         this.setState({
-            editing: false,
+            isEditing: false,
             order: this.props.order
         });
     };
 
-    toggleConfirmationDialog = () => this.setState({
+    toggleDialog = () => this.setState({
         confirmationDialogShown: !this.state.confirmationDialogShown
     });
 
     delete = () => {
         this.props.onDelete(this.state.order);
-    }
+    };
 }

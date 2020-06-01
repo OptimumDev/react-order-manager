@@ -1,0 +1,24 @@
+.order-data {
+    margin: 0 10px 10px;
+    flex-shrink: 0;
+}
+
+.order-data th {
+    text-align: left;
+    padding-right: 10px;
+    font-weight: 600;
+}
+
+.order-data td {
+    line-height: 18px;
+}
+
+.order-data td * {
+    font-size: 16px;
+    padding: 0;
+}
+
+.order-data td input {
+    height: 14px;
+    width: 100px;
+}
