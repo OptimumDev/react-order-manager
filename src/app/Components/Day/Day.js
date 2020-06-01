@@ -9,7 +9,7 @@ export default function Day({date, orders, setOrders, onOrderChange, onOrderDele
         <div className='day'>
             <div className='date'>
                 {new Date(date)
-                    .toLocaleDateString('ru-RU', {year: 'numeric', month: 'long', day: 'numeric'})}
+                    .toLocaleDateString('ru-RU', {day: 'numeric', month: 'long', weekday: 'short'})}
             </div>
             <div className='day-data'>
                 <ReactSortable
@@ -25,7 +25,7 @@ export default function Day({date, orders, setOrders, onOrderChange, onOrderDele
                         <Order order={order} onChange={onOrderChange} onDelete={onOrderDelete} key={order.id}/>
                     )}
                 </ReactSortable>
-                <DayStatistics/>
+                {orders.length > 0 && <DayStatistics/>}
             </div>
         </div>
     );

@@ -1,15 +1,10 @@
 .day-statistics {
-    padding: 10px;
-    min-width: 200px;
 }
 
 .day-statistics {
     background-color: #fafbfc;
     border-left: #e1e4e8 1px solid;
-}
-
-.day-statistics1 {
-    padding: 0 10px;
-    margin: 10px 0;
-    border-left: #e1e4e8 2px solid;
+    flex: 0 0 200px;
+    padding: 10px;
+    box-sizing: border-box;
 }

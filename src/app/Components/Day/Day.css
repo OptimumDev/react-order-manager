@@ -19,11 +19,11 @@
 }
 
 .orders {
-    min-width: 100px;
-    min-height: 100px;
+    min-height: 10px;
     overflow-x: auto;
     display: flex;
     padding: 10px;
+    flex: 1 0 auto;
 }
 
 .orders:empty {
@@ -35,8 +35,7 @@
 }
 
 .day-data {
-    display: grid;
-    grid-template-columns: 4fr 1fr;
+    display: flex;
     border-radius: 0 10px 10px 10px;
     overflow: hidden;
 }
