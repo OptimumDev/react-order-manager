@@ -13,7 +13,7 @@ export default class Calendar extends React.Component {
     }
 
     render() {
-        const {dates, className = ''} = this.props;
+        const {dates, className = '', placement = 'right-start'} = this.props;
         return (
             <DatePicker
                 className={className}
@@ -21,7 +21,7 @@ export default class Calendar extends React.Component {
                 dateFormat='d MMMM'
                 locale={ru}
                 includeDates={dates}
-                popperPlacement={'right-start'}
+                popperPlacement={placement}
                 onChange={this.handleDateChange}
             />
         );

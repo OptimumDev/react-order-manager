@@ -29,6 +29,7 @@ export default class OrderData extends React.Component {
                     current={new Date(this.props.order.date)}
                     onChange={date => this.updateOrder('date', date)}
                     className='input'
+                    placement='right-end'
                 />
             </td>
         </tr>
