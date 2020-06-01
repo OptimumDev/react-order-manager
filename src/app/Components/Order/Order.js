@@ -32,7 +32,12 @@ export default class Order extends React.Component {
                             onDelete={this.toggleDialog}
                         />
                     </header>
-                    <OrderData order={order} isEditing={isEditing} onUpdate={this.updateOrder}/>
+                    <OrderData
+                        order={order}
+                        isEditing={isEditing}
+                        datesToCreate={this.props.datesToCreate}
+                        onUpdate={this.updateOrder}
+                    />
                     {
                         this.state.confirmationDialogShown &&
                         <ConfirmationDialog onCancel={this.toggleDialog} onAccept={this.delete}>

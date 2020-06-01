@@ -10,7 +10,7 @@
 }
 
 .order-data td {
-    line-height: 18px;
+    line-height: 20px;
 }
 
 .order-data td * {
@@ -18,7 +18,7 @@
     padding: 0;
 }
 
-.order-data td input {
-    height: 14px;
+.order-data td .input {
+    height: 16px;
     width: 100px;
 }

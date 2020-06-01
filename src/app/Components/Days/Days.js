@@ -23,6 +23,7 @@ export default class Days extends React.Component {
         <Day
             date={date}
             orders={this.mapOrderIds(orderIds)}
+            datesToCreate={this.props.dates}
             setOrders={this.props.setOrders}
             onOrderChange={this.props.onOrderChange}
             onOrderDelete={orderId => this.props.onOrderDelete(orderId, date)}

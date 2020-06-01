@@ -15,18 +15,17 @@ export default class Main extends React.Component {
             orderIdsByDate, ordersById, setOrders,
             onOrderCreate, onOrderChange, onOrderDelete
         } = this.props;
+        const dates = Object.keys(orderIdsByDate).map(d => new Date(d));
 
         return (
             <div className="main">
                 <header className='app-header'>
                     <span className='app-name'>Order Manager</span>
-                    <Controls
-                        datesToCreate={Object.keys(orderIdsByDate).map(d => new Date(d))}
-                        onOrderCreate={onOrderCreate}
-                    />
+                    <Controls datesToCreate={dates} onOrderCreate={onOrderCreate}/>
                 </header>
                 <Days
                     orderIdsByDate={orderIdsByDate}
+                    dates={dates}
                     ordersById={ordersById}
                     setOrders={setOrders}
                     onOrderChange={onOrderChange}

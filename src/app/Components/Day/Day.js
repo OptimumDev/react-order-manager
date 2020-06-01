@@ -5,7 +5,7 @@ import Order from '../Order/Order'
 import DayStatistics from "../DayStatistics/DayStatistics";
 import DateComponent from "../DateComponent/DateComponent";
 
-export default function Day({date, orders, setOrders, onOrderChange, onOrderDelete}) {
+export default function Day({date, orders, datesToCreate, setOrders, onOrderChange, onOrderDelete}) {
     return (
         <div className='day'>
             <DateComponent date={date}/>
@@ -20,7 +20,13 @@ export default function Day({date, orders, setOrders, onOrderChange, onOrderDele
                     preventOnFilter={false}
                 >
                     {orders.map(order =>
-                        <Order order={order} onChange={onOrderChange} onDelete={onOrderDelete} key={order.id}/>
+                        <Order
+                            key={order.id}
+                            order={order}
+                            datesToCreate={datesToCreate}
+                            onChange={onOrderChange}
+                            onDelete={onOrderDelete}
+                        />
                     )}
                 </ReactSortable>
                 {orders.length > 0 && <DayStatistics/>}

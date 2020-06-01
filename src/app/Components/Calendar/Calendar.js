@@ -8,7 +8,7 @@ export default class Calendar extends React.Component {
         super(props, context);
 
         this.state = {
-            date: this.props.dates[0]
+            date: this.props.current ?? this.props.dates[0]
         };
     }
 
