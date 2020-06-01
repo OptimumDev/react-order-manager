@@ -1,8 +1,8 @@
 import React from "react";
 import './CreateDialog.css';
 import {Modal, Button} from "@skbkontur/react-ui";
-import {fieldNames} from "../../../Constants/OrderFieldNames";
 import Calendar from "../../Calendar/Calendar";
+import {fieldProps} from "../../../Constants/OrderFieldProps";
 
 export default class CreateDialog extends React.Component {
     constructor(props, context) {
@@ -27,12 +27,14 @@ export default class CreateDialog extends React.Component {
                 <form onSubmit={this.create}>
                     <Modal.Body>
                         <div className='order-creation-inputs'>
-                            {this.createInput(fieldNames.number, 'number', 'text')}
-                            {this.createInput(fieldNames.facility, 'facility', 'text')}
-                            {this.createInput(fieldNames.quantity, 'quantity', 'number')}
-                            {this.createInput(fieldNames.area, 'area', 'number')}
+                            {
+                                Object
+                                    .keys(this.order)
+                                    .filter(k => fieldProps[k] && fieldProps[k].showAlways)
+                                    .map(k => this.createInput(k))
+                            }
                             {this.createDateInput()}
-                            {this.createInput('Цвет', 'color', 'color')}
+                            {this.createInput('color')}
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -51,12 +53,12 @@ export default class CreateDialog extends React.Component {
         this.props.onClose();
     };
 
-    createInput = (label, key, type) => (
+    createInput = key => (
         <label key={key} className='input-row'>
-            <span className='input-label'>{label}</span>
+            <span className='input-label'>{fieldProps[key].name}</span>
             <input
                 className='input'
-                type={type}
+                type={fieldProps[key].type}
                 defaultValue={this.order[key]}
                 onChange={e => this.order[key] = e.target.value}
                 required={true}
@@ -67,7 +69,7 @@ export default class CreateDialog extends React.Component {
 
     createDateInput = () => (
         <label key='date' className='input-row'>
-            <span className='input-label'>Дата</span>
+            <span className='input-label'>{fieldProps.date.name}</span>
             <Calendar
                 dates={this.props.datesToCreate}
                 onChange={this.handleDateChange}

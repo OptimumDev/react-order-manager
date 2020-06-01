@@ -1,6 +1,6 @@
 import React from "react";
 import './OrderData.css';
-import {fieldNames} from "../../Constants/OrderFieldNames";
+import {fieldProps} from "../../Constants/OrderFieldProps";
 
 export default class OrderData extends React.Component {
     render() {
@@ -10,7 +10,7 @@ export default class OrderData extends React.Component {
                 {
                     Object
                         .keys(this.props.order)
-                        .filter(k => fieldNames.hasOwnProperty(k))
+                        .filter(k => fieldProps[k] && fieldProps[k].showAlways)
                         .map(k => this.createRow(k))
                 }
                 </tbody>
@@ -23,19 +23,18 @@ export default class OrderData extends React.Component {
 
         return (
             <tr key={key}>
-                <th>{fieldNames[key]}</th>
-                <td>
-                    {isEditing ? this.createOrderInput('text', key) : order[key]}
-                </td>
+                <th>{fieldProps[key].name}</th>
+                <td>{isEditing ? this.createOrderInput(key) : order[key]}</td>
             </tr>
         );
     };
 
-    createOrderInput = (type, key) => (
+    createOrderInput = key => (
         <input
-            type={type}
+            type={fieldProps[key].type}
             value={this.props.order[key]}
             onChange={e => this.updateOrder(key, e.target.value)}
+            min={0}
         />
     );
 
