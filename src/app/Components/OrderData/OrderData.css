@@ -11,6 +11,7 @@
 
 .order-data td {
     line-height: 20px;
+    word-break: break-word;
 }
 
 .order-data td * {
@@ -21,4 +22,22 @@
 .order-data td .input {
     height: 16px;
     width: 100px;
+}
+
+.comment {
+    margin: 0 5px;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    max-height: 100px;
+    overflow-y: auto;
+
+    font-size: 16px;
+
+    word-break: break-word;
+    white-space: pre-wrap;
+    resize: none;
+}
+
+div.comment {
+    border-top: #e1e4e8 solid 1px;
 }

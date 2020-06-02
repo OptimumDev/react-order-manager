@@ -21,7 +21,8 @@ export const defaultState = {
             quantity: 123,
             area: 100,
             color: '#ff0000',
-            date: today.toString()
+            date: today.toString(),
+            comment: 'Важно'
         },
         [id2]: {
             id: id2,
@@ -30,7 +31,8 @@ export const defaultState = {
             quantity: 300,
             area: 500,
             color: '#00ff00',
-            date: today.toString()
+            date: today.toString(),
+            comment: 'И так сойдет'
         },
         [id3]: {
             id: id3,
@@ -39,7 +41,8 @@ export const defaultState = {
             quantity: 467,
             area: 425,
             color: '#0000ff',
-            date: tomorrow.toString()
+            date: tomorrow.toString(),
+            comment: ''
         },
         [id4]: {
             id: id4,
@@ -48,7 +51,8 @@ export const defaultState = {
             quantity: 10,
             area: 23,
             color: '#ffff00',
-            date: tomorrow.toString()
+            date: tomorrow.toString(),
+            comment: 'Неважно'
         }
     },
     orderIdsByDate: {

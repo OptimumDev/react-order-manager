@@ -5,4 +5,5 @@ export const fieldProps = {
     area: {name: 'Площадь', type: 'number', showAlways: true},
     color: {name: 'Цвет', type: 'color', showAlways: false},
     date: {name: 'Дата', showAlways: false},
+    comment: {name: 'Комментарий', showAlways: false},
 };
