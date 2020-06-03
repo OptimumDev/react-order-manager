@@ -153,11 +153,11 @@ const addNewDays = current => {
 };
 
 const updateDays = state => {
-    const now = new Date();
+    const now = new Date(new Date().toDateString());
     const newState = {...state};
 
     const orderedDates = orderDays(state.orderIdsByDate);
-    const [passed, current] = partition(orderedDates, x => x.date < now);
+    const [passed, current] = partition(orderedDates, x => new Date(x.date.toDateString()) < now);
     shiftDays(passed, current, newState);
     addNewDays(current);
 
