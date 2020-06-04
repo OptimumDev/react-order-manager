@@ -26,6 +26,7 @@ export default class OrderButtons extends React.Component {
 
     getEditingButtons = () => (
         <>
+            {this.createButton(deleteIcon, this.props.onDelete)}
             {this.createColorButton()}
             {this.createButton(doneIcon, this.props.onFinishEditing)}
             {this.createButton(closeIcon, this.props.onCancelEditing)}
@@ -35,7 +36,6 @@ export default class OrderButtons extends React.Component {
     getStandardButtons = () => (
         <>
             {this.createButton(editIcon, this.props.onStartEditing)}
-            {this.createButton(deleteIcon, this.props.onDelete)}
         </>
     );
 

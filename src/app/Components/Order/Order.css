@@ -19,7 +19,6 @@
     border-collapse: collapse;
 
     max-width: 250px;
-    overflow-x: auto;
 }
 
 .order-card header {

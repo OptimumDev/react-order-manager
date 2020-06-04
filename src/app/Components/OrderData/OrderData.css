@@ -21,13 +21,12 @@
 
 .order-data td .input {
     height: 16px;
-    width: 100px;
+    width: 116px;
 }
 
 .comment {
     margin: 0 5px;
     padding: 5px 5px;
-    box-sizing: border-box;
     max-height: 100px;
     overflow-y: auto;
 
@@ -40,4 +39,9 @@
 
 div.comment {
     border-top: #e1e4e8 solid 1px;
+}
+
+textarea.comment {
+    border: #e1e4e8 solid 1px;
+    margin: 0 10px 10px;
 }
