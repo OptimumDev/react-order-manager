@@ -13,3 +13,5 @@ export const partition = (arr, predicate) => {
         return acc;
     }, [[], []]);
 };
+
+export const sum = (arr, selector) => arr.reduce((acc, elem, i) => acc + selector(elem, i), 0);

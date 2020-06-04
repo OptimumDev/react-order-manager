@@ -29,7 +29,7 @@ export default function Day({date, orders, datesToCreate, setOrders, onOrderChan
                         />
                     )}
                 </ReactSortable>
-                {orders.length > 0 && <DayStatistics/>}
+                {orders.length > 0 && <DayStatistics orders={orders}/>}
             </div>
         </div>
     );
