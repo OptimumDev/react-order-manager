@@ -1,10 +1,18 @@
 import React from "react";
 import './Main.css';
 import Days from "../Days/Days";
-import Controls from "../Controls/Controls";
+import Header from "../Header/Header";
+import * as PageNames from "../../Constants/PageNames";
 
 
 export default class Main extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            currentPage: PageNames.CURRENT_ORDERS
+        }
+    }
+
     componentDidMount() {
         this.props.updateDays();
         this.updateDaysInterval = setInterval(this.props.updateDays, 60 * 1000);
@@ -19,10 +27,12 @@ export default class Main extends React.Component {
 
         return (
             <div className="main">
-                <header className='app-header'>
-                    <span className='app-name'>Order Manager</span>
-                    <Controls datesToCreate={dates} onOrderCreate={onOrderCreate}/>
-                </header>
+                <Header
+                    currentPage={this.state.currentPage}
+                    datesToCreate={dates}
+                    onPageChange={this.setPage}
+                    onOrderCreate={onOrderCreate}
+                />
                 <Days
                     orderIdsByDate={orderIdsByDate}
                     dates={dates}
@@ -38,4 +48,6 @@ export default class Main extends React.Component {
     componentWillUnmount() {
         this.updateDaysInterval && clearInterval(this.updateDaysInterval)
     }
+
+    setPage = page => this.setState({currentPage: page});
 }

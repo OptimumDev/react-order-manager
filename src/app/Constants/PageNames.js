@@ -1,0 +1,2 @@
+export const CURRENT_ORDERS = 'CURRENT_ORDERS';
+export const DONE_ORDERS = 'DONE_ORDERS';
