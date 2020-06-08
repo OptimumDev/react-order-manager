@@ -30,6 +30,7 @@ export default class Order extends React.Component {
                             onFinishEditing={this.finishEditing}
                             onCancelEditing={this.cancelEditing}
                             onDelete={this.toggleDialog}
+                            onColorChange={this.changeColor}
                         />
                     </header>
                     <OrderData
@@ -74,4 +75,6 @@ export default class Order extends React.Component {
     delete = () => {
         this.props.onDelete(this.state.order);
     };
+
+    changeColor = color => this.updateOrder({...this.state.order, color});
 }

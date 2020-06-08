@@ -1,6 +1,9 @@
 import React from "react";
 import './OrderButtons.css';
 
+import {TwitterPicker} from 'react-color';
+import {colors} from "../../Constants/Colors"
+
 import saveIcon from "../../../images/done-24px.svg";
 import editIcon from "../../../images/edit-24px.svg";
 import cancelIcon from "../../../images/close-24px.svg";
@@ -18,6 +21,13 @@ const iconAlts = {
 };
 
 export default class OrderButtons extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            isColorPickerShown: false
+        };
+    }
+
     render() {
         return (
             <div className='order-buttons'>
@@ -43,28 +53,34 @@ export default class OrderButtons extends React.Component {
     );
 
     createColorButton = () => {
-        const {order, onUpdate} = this.props;
-
         return (
-            <label className='icon-label'>
-                {this.createIcon(colorsIcon)}
-                <input
-                    type='color'
-                    value={order.color}
-                    onChange={e => onUpdate({...order, color: e.target.value})}
-                    tabIndex={-1}
-                />
-            </label>
+            <span className='color-picker'>
+                {this.createButton(colorsIcon, this.toggleColorPicker)}
+                {
+                    this.state.isColorPickerShown &&
+                    <div className='color-picker-container'>
+                        <TwitterPicker
+                            colors={colors}
+                            triangle={'top-right'}
+                            width={168}
+                            onChangeComplete={this.changeColor}
+                        />
+                    </div>
+                }
+            </span>
         );
     };
 
     createButton = (icon, handle) => (
         <button onClick={handle} tabIndex={-1}>
-            {this.createIcon(icon)}
+            <img src={icon} alt={iconAlts[icon]}/>
         </button>
     );
 
-    createIcon = icon => (
-        <img src={icon} alt={iconAlts[icon]}/>
-    );
+    toggleColorPicker = () => this.setState({isColorPickerShown: !this.state.isColorPickerShown});
+
+    changeColor = color => {
+        this.toggleColorPicker();
+        this.props.onColorChange(color.hex);
+    }
 }
