@@ -10,7 +10,7 @@ export default function ColorPicker({onChange, triangle = 'top-right'}) {
                 colors={colors}
                 triangle={triangle}
                 width={168}
-                onChangeComplete={c => c.hex.toUpperCase()}
+                onChangeComplete={c => onChange(c.hex.toUpperCase())}
             />
         </div>
     );
