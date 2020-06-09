@@ -1,7 +1,7 @@
 import React from "react";
 import './Input.css';
 
-export default function Input({type, value, onChange, className, required}) {
+export default function Input({type, value, onChange, className, required, ...props}) {
     return (
         <input
             type={type}
@@ -10,6 +10,7 @@ export default function Input({type, value, onChange, className, required}) {
             className={className}
             required={required}
             min={0}
+            {...props}
         />
     );
 }

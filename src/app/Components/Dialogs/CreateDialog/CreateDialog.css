@@ -23,10 +23,24 @@
 
 .input-row .input {
     width: 160px;
+    box-sizing: border-box;
 }
 
 .order-creation-footer {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.color {
+    position: relative;
+}
+
+.color .input {
+    height: 24px;
+}
+
+.color .color-picker-container {
+    right: -180px;
+    top: -54px;
 }

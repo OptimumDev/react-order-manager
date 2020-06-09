@@ -5,6 +5,8 @@ import Calendar from "../../Calendar/Calendar";
 import {fieldProps} from "../../../Constants/OrderFieldProps";
 import Input from "../../Input/Input";
 import {toISODateString} from "../../../Utils/DateHelper";
+import {colors, textColors} from "../../../Constants/Colors";
+import ColorPicker from "../../ColorPicker/ColorPicker";
 
 export default class CreateDialog extends React.Component {
     constructor(props, context) {
@@ -15,9 +17,13 @@ export default class CreateDialog extends React.Component {
             facility: '',
             quantity: 0,
             area: 0,
-            color: '#ffffff',
             date: toISODateString(this.props.datesToCreate[0])
         };
+
+        this.state = {
+            color: colors[0],
+            isColorPickerShown: false
+        }
     }
 
     render() {
@@ -36,7 +42,7 @@ export default class CreateDialog extends React.Component {
                                     .map(k => this.createInput(k))
                             }
                             {this.createDateInput()}
-                            {this.createInput('color')}
+                            {this.createColorInput()}
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -51,7 +57,7 @@ export default class CreateDialog extends React.Component {
 
     create = e => {
         e.preventDefault();
-        this.props.onCreate(this.order);
+        this.props.onCreate({...this.order, color: this.state.color});
         this.props.onClose();
     };
 
@@ -80,4 +86,30 @@ export default class CreateDialog extends React.Component {
     );
 
     handleDateChange = date => this.order.date = date;
+
+    createColorInput = () => {
+        const {color, isColorPickerShown} = this.state;
+
+        return (
+            <label key='color' className='input-row color'>
+                <span className='input-label'>{fieldProps.color.name}</span>
+                <button
+                    className='input'
+                    style={{background: color, color: textColors[color]}}
+                    onClick={this.toggleColorPicker}
+                />
+                {
+                    isColorPickerShown &&
+                    <ColorPicker onChange={this.changeColor} triangle='none'/>
+                }
+            </label>
+        );
+    };
+
+    toggleColorPicker = e => {
+        e && e.preventDefault();
+        this.setState({isColorPickerShown: !this.state.isColorPickerShown});
+    };
+
+    changeColor = color => this.setState({color});
 }

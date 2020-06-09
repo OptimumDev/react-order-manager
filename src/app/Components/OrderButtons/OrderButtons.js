@@ -1,8 +1,7 @@
 import React from "react";
 import './OrderButtons.css';
 
-import {TwitterPicker} from 'react-color';
-import {colors} from "../../Constants/Colors"
+import ColorPicker from "../ColorPicker/ColorPicker";
 
 import saveIcon from "../../../images/done-24px.svg";
 import editIcon from "../../../images/edit-24px.svg";
@@ -52,24 +51,15 @@ export default class OrderButtons extends React.Component {
         </>
     );
 
-    createColorButton = () => {
-        return (
-            <span className='color-picker'>
-                {this.createButton(colorsIcon, this.toggleColorPicker)}
-                {
-                    this.state.isColorPickerShown &&
-                    <div className='color-picker-container'>
-                        <TwitterPicker
-                            colors={colors}
-                            triangle={'top-right'}
-                            width={168}
-                            onChangeComplete={this.changeColor}
-                        />
-                    </div>
-                }
-            </span>
-        );
-    };
+    createColorButton = () => (
+        <span className='color-picker'>
+            {this.createButton(colorsIcon, this.toggleColorPicker)}
+            {
+                this.state.isColorPickerShown &&
+                <ColorPicker onChange={this.changeColor}/>
+            }
+        </span>
+    );
 
     createButton = (icon, handle) => (
         <button onClick={handle} tabIndex={-1}>
@@ -81,6 +71,6 @@ export default class OrderButtons extends React.Component {
 
     changeColor = color => {
         this.toggleColorPicker();
-        this.props.onColorChange(color.hex);
+        this.props.onColorChange(color);
     }
 }
