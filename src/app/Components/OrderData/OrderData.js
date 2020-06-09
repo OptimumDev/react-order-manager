@@ -3,6 +3,7 @@ import './OrderData.css';
 import {fieldProps} from "../../Constants/OrderFieldProps";
 import Calendar from "../Calendar/Calendar";
 import TextareaAutosize from 'react-textarea-autosize';
+import Input from "../Input/Input";
 
 export default class OrderData extends React.Component {
     render() {
@@ -67,12 +68,11 @@ export default class OrderData extends React.Component {
     };
 
     createInput = key => (
-        <input
+        <Input
             type={fieldProps[key].type}
             value={this.props.order[key]}
-            onChange={e => this.updateOrder(key, e.target.value)}
+            onChange={v => this.updateOrder(key, v)}
             className='input'
-            min={0}
         />
     );
 

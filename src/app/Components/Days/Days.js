@@ -2,6 +2,7 @@ import React from "react";
 import './Days.css'
 import Day from "../Day/Day";
 import {orderBy} from "../../Utils/arrayHelper";
+import {toISODateString} from "../../Utils/DateHelper";
 
 export default class Days extends React.Component {
     render() {
@@ -27,7 +28,7 @@ export default class Days extends React.Component {
             setOrders={this.props.setOrders}
             onOrderChange={this.props.onOrderChange}
             onOrderDelete={orderId => this.props.onOrderDelete(orderId, date)}
-            key={date.toString()}
+            key={toISODateString(date)}
         />
     );
 }

@@ -3,6 +3,7 @@ import {createReducer} from 'redux-create-reducer';
 import {v4 as uuidv4} from "uuid";
 import {orderBy, partition} from "../Utils/arrayHelper";
 import {colors} from "../Constants/Colors"
+import {toISODateString} from "../Utils/DateHelper";
 
 const id1 = uuidv4();
 const id2 = uuidv4();
@@ -13,6 +14,9 @@ const today = new Date();
 const tomorrow = new Date();
 tomorrow.setDate(today.getDate() + 1);
 
+const todayStr = toISODateString(today);
+const tomorrowStr = toISODateString(tomorrow);
+
 export const defaultState = {
     ordersById: {
         [id1]: {
@@ -22,7 +26,7 @@ export const defaultState = {
             quantity: 123,
             area: 100,
             color: colors[0],
-            date: today.toString(),
+            date: todayStr,
             comment: 'Важно'
         },
         [id2]: {
@@ -32,7 +36,7 @@ export const defaultState = {
             quantity: 300,
             area: 500,
             color: colors[1],
-            date: today.toString(),
+            date: todayStr,
             comment: 'И так сойдет'
         },
         [id3]: {
@@ -42,7 +46,7 @@ export const defaultState = {
             quantity: 467,
             area: 425,
             color: colors[2],
-            date: tomorrow.toString(),
+            date: tomorrowStr,
             comment: ''
         },
         [id4]: {
@@ -52,13 +56,13 @@ export const defaultState = {
             quantity: 10,
             area: 23,
             color: colors[3],
-            date: tomorrow.toString(),
+            date: tomorrowStr,
             comment: 'Неважно'
         }
     },
     orderIdsByDate: {
-        [today]: [id1, id2],
-        [tomorrow]: [id3, id4]
+        [todayStr]: [id1, id2],
+        [tomorrowStr]: [id3, id4]
     }
 };
 
@@ -138,7 +142,7 @@ const shiftDays = (passed, current, newState) => {
 
     for (const {ids} of passed) {
         for (const id of ids)
-            newState.ordersById[id].date = first.date.toString();
+            newState.ordersById[id].date = toISODateString(first.date);
         first.ids.push(...ids);
     }
 };
@@ -154,16 +158,16 @@ const addNewDays = current => {
 };
 
 const updateDays = state => {
-    const now = new Date(new Date().toDateString());
+    const now = new Date(toISODateString(new Date()));
     const newState = {...state};
 
     const orderedDates = orderDays(state.orderIdsByDate);
-    const [passed, current] = partition(orderedDates, x => new Date(x.date.toDateString()) < now);
+    const [passed, current] = partition(orderedDates, x => x.date < now);
     shiftDays(passed, current, newState);
     addNewDays(current);
 
     newState.orderIdsByDate = current.reduce((acc, {date, ids}) => {
-        acc[date] = ids;
+        acc[toISODateString(date)] = ids;
         return acc;
     }, {});
 

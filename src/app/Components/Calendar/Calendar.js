@@ -2,6 +2,7 @@ import React from "react";
 import './Calendar.css';
 import ru from "date-fns/locale/ru";
 import DatePicker from "react-datepicker";
+import {toISODateString} from "../../Utils/DateHelper";
 
 export default class Calendar extends React.Component {
     constructor(props, context) {
@@ -30,6 +31,6 @@ export default class Calendar extends React.Component {
     handleDateChange = (date, event) => {
         event.preventDefault();
         this.setState({date});
-        this.props.onChange(date.toString());
+        this.props.onChange(toISODateString(date));
     };
 }

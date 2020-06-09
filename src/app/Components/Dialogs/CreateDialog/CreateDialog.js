@@ -3,6 +3,8 @@ import './CreateDialog.css';
 import {Modal, Button} from "@skbkontur/react-ui";
 import Calendar from "../../Calendar/Calendar";
 import {fieldProps} from "../../../Constants/OrderFieldProps";
+import Input from "../../Input/Input";
+import {toISODateString} from "../../../Utils/DateHelper";
 
 export default class CreateDialog extends React.Component {
     constructor(props, context) {
@@ -14,7 +16,7 @@ export default class CreateDialog extends React.Component {
             quantity: 0,
             area: 0,
             color: '#ffffff',
-            date: this.props.datesToCreate[0].toString()
+            date: toISODateString(this.props.datesToCreate[0])
         };
     }
 
@@ -56,13 +58,12 @@ export default class CreateDialog extends React.Component {
     createInput = key => (
         <label key={key} className='input-row'>
             <span className='input-label'>{fieldProps[key].name}</span>
-            <input
+            <Input
                 className='input'
+                value={this.order[key]}
                 type={fieldProps[key].type}
-                defaultValue={this.order[key]}
-                onChange={e => this.order[key] = e.target.value}
+                onChange={v => this.order[key] = v}
                 required={true}
-                min={0}
             />
         </label>
     );
