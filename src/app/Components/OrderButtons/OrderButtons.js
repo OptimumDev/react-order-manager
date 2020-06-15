@@ -2,6 +2,7 @@ import React from "react";
 import './OrderButtons.css';
 
 import ColorPicker from "../ColorPicker/ColorPicker";
+import IconButton from "../IconButton/IconButton";
 
 import saveIcon from "../../../images/done-24px.svg";
 import editIcon from "../../../images/edit-24px.svg";
@@ -78,9 +79,13 @@ export default class OrderButtons extends React.Component {
     );
 
     createButton = (icon, handle) => (
-        <button onClick={handle} tabIndex={-1}>
-            <img src={icon} alt={iconAlts[icon]}/>
-        </button>
+        <IconButton
+            onClick={handle}
+            icon={icon}
+            alt={iconAlts[icon]}
+            className={'order-button'}
+            tabIndex={-1}
+        />
     );
 
     toggleColorPicker = () => this.setState({isColorPickerShown: !this.state.isColorPickerShown});

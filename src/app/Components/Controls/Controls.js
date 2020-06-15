@@ -2,6 +2,7 @@ import React from "react";
 import './Controls.css';
 import createIcon from '../../../images/note_add-black-36dp.svg';
 import CreateDialog from "../Dialogs/CreateDialog/CreateDialog";
+import IconButton from "../IconButton/IconButton";
 
 export default class Controls extends React.Component {
 
@@ -16,9 +17,7 @@ export default class Controls extends React.Component {
     render() {
         return (
             <div className='controls'>
-                <button onClick={this.toggleCreateDialog}>
-                    <img src={createIcon} alt='+' draggable={false}/>
-                </button>
+                <IconButton onClick={this.toggleCreateDialog} icon={createIcon} alt='+' draggable={false}/>
                 {
                     this.state.createDialogShown &&
                     <CreateDialog
