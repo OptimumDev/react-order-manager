@@ -87,9 +87,9 @@ export const defaultState = {
 const setOrderIds = (state, {payload}) => ({
     ...state,
     ordersById: payload.orderIds.reduce((acc, id) => {
-        acc[id].date = payload.date;
+        acc[id] = {...acc[id], date: payload.date};
         return acc;
-    }, state.ordersById),
+    }, {...state.ordersById}),
     orderIdsByDate: {
         ...state.orderIdsByDate,
         [payload.date]: payload.orderIds
@@ -230,7 +230,7 @@ const restoreOrder = (state, {payload}) => {
     const {order} = payload;
     const restoreDate = toISODateString(new Date());
 
-    return {
+    const newState = {
         ...state,
         ordersById: {
             ...state.ordersById,
@@ -247,6 +247,12 @@ const restoreOrder = (state, {payload}) => {
             [order.date]: state.doneOrderIdsByDate[order.date].filter(id => id !== order.id)
         }
     };
+
+    const {[order.date]: ids, ...doneOrderIdsByDate} = newState.doneOrderIdsByDate;
+    if (ids.length === 0)
+        newState.doneOrderIdsByDate = doneOrderIdsByDate;
+
+    return newState;
 };
 
 export const rootReducer = createReducer(defaultState, {

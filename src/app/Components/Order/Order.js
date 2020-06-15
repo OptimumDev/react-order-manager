@@ -10,12 +10,14 @@ export default class Order extends React.Component {
         this.state = {
             isEditing: false,
             order: props.order,
-            confirmationDialogShown: false
+            deleteDialogShown: false,
+            doneDialogShown: false,
+            restoreDialogShown: false,
         }
     }
 
     render() {
-        const {isEditing, order} = this.state;
+        const {isEditing, order, deleteDialogShown, doneDialogShown, restoreDialogShown} = this.state;
 
         return (
             <div className={`order-container` + (isEditing ? ' editing' : '')}>
@@ -24,13 +26,15 @@ export default class Order extends React.Component {
                         {/* ↓ для пометки "Важное" и тп */}
                         <div className='order-icons'/>
                         <OrderButtons
-                            order={order}
                             isEditing={isEditing}
+                            isDone={order.isDone}
                             onStartEditing={this.startEditing}
                             onFinishEditing={this.finishEditing}
                             onCancelEditing={this.cancelEditing}
-                            onDelete={this.toggleDialog}
+                            onDelete={this.toggleDeleteDialog}
                             onColorChange={this.changeColor}
+                            onDone={this.toggleDoneDialog}
+                            onRestore={this.toggleRestoreDialog}
                         />
                     </header>
                     <OrderData
@@ -39,16 +43,20 @@ export default class Order extends React.Component {
                         datesToCreate={this.props.datesToCreate}
                         onUpdate={this.updateOrder}
                     />
-                    {
-                        this.state.confirmationDialogShown &&
-                        <ConfirmationDialog onCancel={this.toggleDialog} onAccept={this.delete}>
-                            Удалить заказ {this.state.order.number}?
-                        </ConfirmationDialog>
-                    }
+                    {this.getDialog(deleteDialogShown, 'Удалить', this.delete, this.toggleDeleteDialog)}
+                    {this.getDialog(doneDialogShown, 'Завершить', this.markDone, this.toggleDoneDialog)}
+                    {this.getDialog(restoreDialogShown, 'Восстановить', this.restore, this.toggleRestoreDialog)}
                 </div>
             </div>
         );
     }
+
+    getDialog = (isShown, verb, onAccept, onCancel) => (
+        isShown &&
+        <ConfirmationDialog acceptValue={verb} onAccept={onAccept} onCancel={onCancel}>
+            {verb} заказ {this.props.order.number}?
+        </ConfirmationDialog>
+    );
 
     updateOrder = order => this.setState({order});
 
@@ -68,8 +76,16 @@ export default class Order extends React.Component {
         });
     };
 
-    toggleDialog = () => this.setState({
-        confirmationDialogShown: !this.state.confirmationDialogShown
+    toggleDeleteDialog = () => this.setState({
+        deleteDialogShown: !this.state.deleteDialogShown
+    });
+
+    toggleDoneDialog = () => this.setState({
+        doneDialogShown: !this.state.doneDialogShown
+    });
+
+    toggleRestoreDialog = () => this.setState({
+        restoreDialogShown: !this.state.restoreDialogShown
     });
 
     delete = () => {
@@ -77,4 +93,12 @@ export default class Order extends React.Component {
     };
 
     changeColor = color => this.updateOrder({...this.state.order, color});
+
+    markDone = () => {
+        this.props.onDone(this.state.order);
+    }
+
+    restore = () => {
+        this.props.onRestore(this.state.order);
+    }
 }

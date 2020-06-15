@@ -9,6 +9,7 @@ import cancelIcon from "../../../images/close-24px.svg";
 import deleteIcon from "../../../images/delete_forever-24px.svg";
 import colorsIcon from "../../../images/color_lens-24px.svg";
 import doneIcon from "../../../images/check_box-24px.svg";
+import restoreIcon from "../../../images/reply-24px.svg";
 
 const iconAlts = {
     editIcon: '✏️',
@@ -16,7 +17,8 @@ const iconAlts = {
     colorsIcon: '🎨',
     deleteIcon: '🗑️',
     cancelIcon: '❌',
-    doneIcon: '☑️'
+    doneIcon: '☑️',
+    restoreIcon: '↩️'
 };
 
 export default class OrderButtons extends React.Component {
@@ -30,9 +32,17 @@ export default class OrderButtons extends React.Component {
     render() {
         return (
             <div className='order-buttons'>
-                {this.props.isEditing ? this.getEditingButtons() : this.getStandardButtons()}
+                {this.getButtons()}
             </div>
         );
+    }
+
+    getButtons = () => {
+        if (this.props.isDone)
+            return this.getRestoreButtons();
+        if (this.props.isEditing)
+            return this.getEditingButtons();
+        return this.getStandardButtons();
     }
 
     getEditingButtons = () => (
@@ -42,12 +52,18 @@ export default class OrderButtons extends React.Component {
             {this.createButton(saveIcon, this.props.onFinishEditing)}
             {this.createButton(cancelIcon, this.props.onCancelEditing)}
         </>
-    )
+    );
 
     getStandardButtons = () => (
         <>
             {this.createButton(editIcon, this.props.onStartEditing)}
-            {this.createButton(doneIcon)}
+            {this.createButton(doneIcon, this.props.onDone)}
+        </>
+    );
+
+    getRestoreButtons = () => (
+        <>
+            {this.createButton(restoreIcon, this.props.onRestore)}
         </>
     );
 

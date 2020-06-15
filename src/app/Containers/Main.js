@@ -1,6 +1,14 @@
 import { connect } from 'react-redux';
 import Main from "../Components/Main/Main";
-import {changeOrder, createOrder, deleteOrder, setDoneOrderIds, setOrderIds, updateDays} from "../Actions";
+import {
+    changeOrder,
+    createOrder,
+    deleteOrder,
+    markOrderDone, restoreOrder,
+    setDoneOrderIds,
+    setOrderIds,
+    updateDays
+} from "../Actions";
 
 export default connect(
     (state, props) => ({
@@ -14,6 +22,8 @@ export default connect(
         onOrderCreate: order => dispatch(createOrder(order)),
         onOrderChange: order => dispatch(changeOrder(order)),
         onOrderDelete: order => dispatch(deleteOrder(order)),
+        onOrderDone: order => dispatch(markOrderDone(order)),
+        onOrderRestore: order => dispatch(restoreOrder(order)),
         updateDays: () => dispatch(updateDays())
     })
 )(Main);

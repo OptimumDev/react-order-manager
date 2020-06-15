@@ -39,7 +39,8 @@ export default class Main extends React.Component {
     getPage = dates => {
         const {
             orderIdsByDate, ordersById, doneOrderIdsByDate,
-            setOrders, setDoneOrders, onOrderChange, onOrderDelete
+            setOrders, setDoneOrders,
+            onOrderChange, onOrderDelete, onOrderDone, onOrderRestore
         } = this.props;
         switch (this.state.currentPage) {
             case PageNames.CURRENT_ORDERS:
@@ -51,17 +52,16 @@ export default class Main extends React.Component {
                         setOrders={setOrders}
                         onOrderChange={onOrderChange}
                         onOrderDelete={onOrderDelete}
+                        onOrderDone={onOrderDone}
                     />
                 );
             case PageNames.DONE_ORDERS:
                 return (
                     <DoneOrdersPage
                         doneOrderIdsByDate={doneOrderIdsByDate}
-                        dates={dates}
                         ordersById={ordersById}
                         setOrders={setDoneOrders}
-                        onOrderChange={onOrderChange}
-                        onOrderDelete={onOrderDelete}
+                        onOrderRestore={onOrderRestore}
                     />
                 );
             default:

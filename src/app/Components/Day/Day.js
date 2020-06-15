@@ -6,7 +6,11 @@ import DayStatistics from "../DayStatistics/DayStatistics";
 import DateComponent from "../DateComponent/DateComponent";
 
 export default function Day(
-    {date, orders, datesToCreate, setOrders, onOrderChange, onOrderDelete, disableDragging = false}
+    {
+        date, orders, datesToCreate, setOrders,
+        onOrderChange, onOrderDelete, onOrderDone, onOrderRestore,
+        disableDragging = false
+    }
 ) {
     return (
         <div className='day'>
@@ -29,6 +33,8 @@ export default function Day(
                             datesToCreate={datesToCreate}
                             onChange={onOrderChange}
                             onDelete={onOrderDelete}
+                            onDone={onOrderDone}
+                            onRestore={onOrderRestore}
                         />
                     )}
                 </ReactSortable>
