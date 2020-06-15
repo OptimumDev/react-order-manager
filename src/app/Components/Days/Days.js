@@ -29,7 +29,10 @@ export default class Days extends React.Component {
     mapOrderIds = (orderIds) => orderIds.map(id => (this.props.ordersById[id]));
 
     mapDay = ([date, orderIds]) => {
-        const {dates, setOrders, onOrderChange, onOrderDelete, disableDragging = false} = this.props;
+        const {
+            dates, setOrders, onOrderChange, onOrderDelete, onOrderDone, onOrderRestore,
+            disableDragging = false
+        } = this.props;
         return (
             <Day
                 date={date}
@@ -37,7 +40,9 @@ export default class Days extends React.Component {
                 datesToCreate={dates}
                 setOrders={setOrders}
                 onOrderChange={onOrderChange}
-                onOrderDelete={orderId => onOrderDelete(orderId, date)}
+                onOrderDelete={order => onOrderDelete(order, date)}
+                onOrderDone={onOrderDone}
+                onOrderRestore={onOrderRestore}
                 disableDragging={disableDragging}
                 key={toISODateString(date)}
             />

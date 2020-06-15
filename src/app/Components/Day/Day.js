@@ -12,9 +12,11 @@ export default function Day(
         disableDragging = false
     }
 ) {
+    const dateObj = new Date(date);
+
     return (
         <div className='day'>
-            <DateComponent date={date}/>
+            <DateComponent date={dateObj}/>
             <div className='day-data'>
                 <ReactSortable
                     className='orders'
@@ -40,6 +42,7 @@ export default function Day(
                 </ReactSortable>
                 {orders.length > 0 && <DayStatistics orders={orders}/>}
             </div>
+            {dateObj.getDay() === 0 && <div className='divider'/>}
         </div>
     );
 }
