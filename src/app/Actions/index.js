@@ -51,7 +51,7 @@ export const markOrderDone = order => ({
 });
 
 export const restoreOrder = order => ({
-    type: actionTypes.MARK_ORDER_DONE,
+    type: actionTypes.RESTORE_ORDER,
     payload: {
         order
     }
