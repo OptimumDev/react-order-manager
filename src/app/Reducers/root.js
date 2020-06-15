@@ -68,6 +68,10 @@ export const defaultState = {
 
 const setOrderIds = (state, {payload}) => ({
     ...state,
+    ordersById: payload.orderIds.reduce((acc, id) => {
+            acc[id].date = payload.date;
+            return acc;
+        }, state.ordersById),
     orderIdsByDate: {
         ...state.orderIdsByDate,
         [payload.date]: payload.orderIds
