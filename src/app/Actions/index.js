@@ -42,3 +42,17 @@ export const updateDays = () => ({
     type: actionTypes.UPDATE_DAYS,
     payload: {}
 });
+
+export const markOrderDone = order => ({
+    type: actionTypes.MARK_ORDER_DONE,
+    payload: {
+        order
+    }
+});
+
+export const restoreOrder = order => ({
+    type: actionTypes.MARK_ORDER_DONE,
+    payload: {
+        order
+    }
+});

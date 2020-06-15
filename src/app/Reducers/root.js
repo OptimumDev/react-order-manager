@@ -87,9 +87,9 @@ export const defaultState = {
 const setOrderIds = (state, {payload}) => ({
     ...state,
     ordersById: payload.orderIds.reduce((acc, id) => {
-            acc[id].date = payload.date;
-            return acc;
-        }, state.ordersById),
+        acc[id].date = payload.date;
+        return acc;
+    }, state.ordersById),
     orderIdsByDate: {
         ...state.orderIdsByDate,
         [payload.date]: payload.orderIds
@@ -183,7 +183,7 @@ const addNewDays = current => {
     for (let i = current.length; i < DAYS_COUNT; i++) {
         const date = new Date(first.date);
         date.setDate(date.getDate() + i);
-        current.push({date,  ids: []});
+        current.push({date, ids: []});
     }
 };
 
@@ -204,6 +204,51 @@ const updateDays = state => {
     return newState;
 };
 
+const markOrderDone = (state, {payload}) => {
+    const {order} = payload;
+
+    return {
+        ...state,
+        ordersById: {
+            ...state.ordersById,
+            [order.id]: {...order, isDone: true}
+        },
+        orderIdsByDate: {
+            ...state.orderIdsByDate,
+            [order.date]: state.orderIdsByDate[order.date].filter(id => id !== order.id)
+        },
+        doneOrderIdsByDate: {
+            ...state.doneOrderIdsByDate,
+            [order.date]: state.doneOrderIdsByDate[order.date]
+                ? state.doneOrderIdsByDate[order.date].concat(order.id)
+                : [order.id]
+        }
+    };
+};
+
+const restoreOrder = (state, {payload}) => {
+    const {order} = payload;
+    const restoreDate = toISODateString(new Date());
+
+    return {
+        ...state,
+        ordersById: {
+            ...state.ordersById,
+            [order.id]: {...order, date: restoreDate, isDone: false}
+        },
+        orderIdsByDate: {
+            ...state.orderIdsByDate,
+            [restoreDate]: state.orderIdsByDate[restoreDate]
+                ? state.orderIdsByDate[restoreDate].concat(order.id)
+                : [order.id]
+        },
+        doneOrderIdsByDate: {
+            ...state.doneOrderIdsByDate,
+            [order.date]: state.doneOrderIdsByDate[order.date].filter(id => id !== order.id)
+        }
+    };
+};
+
 export const rootReducer = createReducer(defaultState, {
     [actionTypes.SET_ORDER_IDS]: setOrderIds,
     [actionTypes.SET_DONE_ORDER_IDS]: setDoneOrderIds,
@@ -211,4 +256,6 @@ export const rootReducer = createReducer(defaultState, {
     [actionTypes.CREATE_ORDER]: createOrder,
     [actionTypes.DELETE_ORDER]: deleteOrder,
     [actionTypes.UPDATE_DAYS]: updateDays,
+    [actionTypes.MARK_ORDER_DONE]: markOrderDone,
+    [actionTypes.RESTORE_ORDER]: restoreOrder,
 });
