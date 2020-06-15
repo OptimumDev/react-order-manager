@@ -32,6 +32,10 @@
     overflow: hidden;
 }
 
+.day:last-child .divider {
+    display: none;
+}
+
 .divider {
     width: 100%;
     border-bottom: #e1e4e8 solid 3px;

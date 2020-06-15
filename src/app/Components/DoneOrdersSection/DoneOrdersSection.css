@@ -1,6 +1,6 @@
 .done-orders-section {
     border: #e1e4e8 solid 1px;
-    border-radius: 3px;
+    border-radius: 5px;
     margin-bottom: 15px;
 }
 
@@ -13,10 +13,14 @@
     display: flex;
     align-items: center;
     border-bottom: #e1e4e8 solid 1px;
-    background-color: #eff1f3;
+    background-color: #f6f8fa;
     font-weight: 600;
 }
 
 .done-orders-header .expand-button {
     margin-left: auto;
+}
+
+.done-orders-body .day:last-child {
+    margin-bottom: 5px;
 }
