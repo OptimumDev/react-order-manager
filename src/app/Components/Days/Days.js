@@ -13,22 +13,34 @@ export default class Days extends React.Component {
         );
     }
 
-    mapDays = () => orderBy(
-        Object.entries(this.props.orderIdsByDate),
-        ([date,]) => new Date(date)
-    ).map(this.mapDay);
+    mapDays = () => {
+        const {orderIdsByDate, showCount, skipCount = 0, skipEmpty = false, byDescending = false} = this.props;
+        let entries = Object.entries(orderIdsByDate).filter(([, ids]) => !skipEmpty || ids.length > 0);
+        if (showCount != null)
+            entries = entries.slice(skipCount, skipCount + showCount);
+
+        return orderBy(
+            entries,
+            ([date,]) => new Date(date),
+            byDescending
+        ).map(this.mapDay);
+    };
 
     mapOrderIds = (orderIds) => orderIds.map(id => (this.props.ordersById[id]));
 
-    mapDay = ([date, orderIds]) => (
-        <Day
-            date={date}
-            orders={this.mapOrderIds(orderIds)}
-            datesToCreate={this.props.dates}
-            setOrders={this.props.setOrders}
-            onOrderChange={this.props.onOrderChange}
-            onOrderDelete={orderId => this.props.onOrderDelete(orderId, date)}
-            key={toISODateString(date)}
-        />
-    );
+    mapDay = ([date, orderIds]) => {
+        const {dates, setOrders, onOrderChange, onOrderDelete, disableDragging = false} = this.props;
+        return (
+            <Day
+                date={date}
+                orders={this.mapOrderIds(orderIds)}
+                datesToCreate={dates}
+                setOrders={setOrders}
+                onOrderChange={onOrderChange}
+                onOrderDelete={orderId => onOrderDelete(orderId, date)}
+                disableDragging={disableDragging}
+                key={toISODateString(date)}
+            />
+        );
+    };
 }

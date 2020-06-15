@@ -1,8 +1,9 @@
 import React from "react";
 import './Main.css';
-import Days from "../Days/Days";
+import CurrentOrdersPage from "../Pages/CurrentOrdersPage/CurrentOrdersPage";
 import Header from "../Header/Header";
 import * as PageNames from "../../Constants/PageNames";
+import DoneOrdersPage from "../Pages/DoneOrdersPage/DoneOrdersPage";
 
 
 export default class Main extends React.Component {
@@ -19,10 +20,7 @@ export default class Main extends React.Component {
     }
 
     render() {
-        const {
-            orderIdsByDate, ordersById, setOrders,
-            onOrderCreate, onOrderChange, onOrderDelete
-        } = this.props;
+        const {orderIdsByDate, onOrderCreate} = this.props;
         const dates = Object.keys(orderIdsByDate).map(d => new Date(d));
 
         return (
@@ -33,17 +31,43 @@ export default class Main extends React.Component {
                     onPageChange={this.setPage}
                     onOrderCreate={onOrderCreate}
                 />
-                <Days
-                    orderIdsByDate={orderIdsByDate}
-                    dates={dates}
-                    ordersById={ordersById}
-                    setOrders={setOrders}
-                    onOrderChange={onOrderChange}
-                    onOrderDelete={onOrderDelete}
-                />
+                {this.getPage(dates)}
             </div>
         );
     }
+
+    getPage = dates => {
+        const {
+            orderIdsByDate, ordersById, doneOrderIdsByDate,
+            setOrders, setDoneOrders, onOrderChange, onOrderDelete
+        } = this.props;
+        switch (this.state.currentPage) {
+            case PageNames.CURRENT_ORDERS:
+                return (
+                    <CurrentOrdersPage
+                        orderIdsByDate={orderIdsByDate}
+                        dates={dates}
+                        ordersById={ordersById}
+                        setOrders={setOrders}
+                        onOrderChange={onOrderChange}
+                        onOrderDelete={onOrderDelete}
+                    />
+                );
+            case PageNames.DONE_ORDERS:
+                return (
+                    <DoneOrdersPage
+                        doneOrderIdsByDate={doneOrderIdsByDate}
+                        dates={dates}
+                        ordersById={ordersById}
+                        setOrders={setDoneOrders}
+                        onOrderChange={onOrderChange}
+                        onOrderDelete={onOrderDelete}
+                    />
+                );
+            default:
+                console.error(`Can't load page with name "${this.state.currentPage}"`);
+        }
+    };
 
     componentWillUnmount() {
         this.updateDaysInterval && clearInterval(this.updateDaysInterval)

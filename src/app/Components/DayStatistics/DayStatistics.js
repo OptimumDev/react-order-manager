@@ -5,7 +5,6 @@ import {colors, textColors} from "../../Constants/Colors";
 
 export default function DayStatistics({orders}) {
     const statistics = getStatistics(orders);
-    console.log(statistics)
     return (
         <div className='day-statistics'>
             <table className='order-data'>

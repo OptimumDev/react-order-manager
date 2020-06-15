@@ -1,6 +1,9 @@
-export const orderBy = (arr, keyPredicate) => {
+export const orderBy = (arr, keyPredicate, byDescending = false) => {
     const sorted = [...arr];
-    sorted.sort((a, b) => keyPredicate(a) - keyPredicate(b));
+    sorted.sort((a, b) => byDescending
+        ? keyPredicate(b) - keyPredicate(a)
+        : keyPredicate(a) - keyPredicate(b)
+    );
     return sorted;
 };
 

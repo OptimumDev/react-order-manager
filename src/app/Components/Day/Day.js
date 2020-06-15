@@ -5,7 +5,9 @@ import Order from '../Order/Order'
 import DayStatistics from "../DayStatistics/DayStatistics";
 import DateComponent from "../DateComponent/DateComponent";
 
-export default function Day({date, orders, datesToCreate, setOrders, onOrderChange, onOrderDelete}) {
+export default function Day(
+    {date, orders, datesToCreate, setOrders, onOrderChange, onOrderDelete, disableDragging = false}
+) {
     return (
         <div className='day'>
             <DateComponent date={date}/>
@@ -18,6 +20,7 @@ export default function Day({date, orders, datesToCreate, setOrders, onOrderChan
                     setList={os => setOrders(os, date)}
                     filter='.editing'
                     preventOnFilter={false}
+                    disabled={disableDragging}
                 >
                     {orders.map(order =>
                         <Order
