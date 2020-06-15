@@ -1,0 +1,22 @@
+.done-orders-section {
+    border: #e1e4e8 solid 1px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.done-orders-header,
+.done-orders-body {
+    padding: 5px 10px;
+}
+
+.done-orders-header {
+    display: flex;
+    align-items: center;
+    border-bottom: #e1e4e8 solid 1px;
+    background-color: #eff1f3;
+    font-weight: 600;
+}
+
+.done-orders-header .expand-button {
+    margin-left: auto;
+}
