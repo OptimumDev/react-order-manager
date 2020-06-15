@@ -1,16 +1,17 @@
 .order-data {
     margin: 0 10px 10px;
     flex-shrink: 0;
+    border-collapse: collapse;
 }
 
 .order-data th {
     text-align: left;
-    padding-right: 10px;
+    padding: 1px 10px 1px 0;
     font-weight: 600;
 }
 
 .order-data td {
-    line-height: 20px;
+    line-height: 21px;
     word-break: break-word;
 }
 
@@ -22,6 +23,8 @@
 .order-data td .input {
     height: 16px;
     width: 116px;
+    margin-left: -2px;
+    font-family: inherit;
 }
 
 .comment {
@@ -31,6 +34,7 @@
     overflow-y: auto;
 
     font-size: 16px;
+    font-family: inherit;
 
     word-break: break-word;
     white-space: pre-wrap;

@@ -8,7 +8,7 @@ export default function DayStatistics({orders}) {
     return (
         <div className='day-statistics'>
             <table className='order-data'>
-                <thead>Итого:</thead>
+                <caption>Итого:</caption>
                 <tbody>
                 <tr>
                     <th>{fieldProps.quantity.name}</th>

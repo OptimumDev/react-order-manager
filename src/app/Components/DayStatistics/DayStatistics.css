@@ -31,3 +31,7 @@
 
     font-weight: 700;
 }
+
+.order-data caption {
+    text-align: left;
+}
