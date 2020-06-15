@@ -9,13 +9,17 @@ const id1 = uuidv4();
 const id2 = uuidv4();
 const id3 = uuidv4();
 const id4 = uuidv4();
+const id5 = uuidv4();
 
 const today = new Date();
 const tomorrow = new Date();
 tomorrow.setDate(today.getDate() + 1);
+const yesterday = new Date();
+yesterday.setDate(today.getDate() - 1);
 
 const todayStr = toISODateString(today);
 const tomorrowStr = toISODateString(tomorrow);
+const yesterdayStr = toISODateString(yesterday);
 
 export const defaultState = {
     ordersById: {
@@ -58,11 +62,25 @@ export const defaultState = {
             color: colors[3],
             date: tomorrowStr,
             comment: 'Неважно'
+        },
+        [id5]: {
+            id: id5,
+            number: '09876',
+            facility: 'Объект 5',
+            quantity: 1000,
+            area: 2345,
+            color: colors[4],
+            date: yesterdayStr,
+            comment: '',
+            isDone: true
         }
     },
     orderIdsByDate: {
         [todayStr]: [id1, id2],
         [tomorrowStr]: [id3, id4]
+    },
+    doneOrderIdsByDate: {
+        [yesterdayStr]: [id5]
     }
 };
 
@@ -74,6 +92,14 @@ const setOrderIds = (state, {payload}) => ({
         }, state.ordersById),
     orderIdsByDate: {
         ...state.orderIdsByDate,
+        [payload.date]: payload.orderIds
+    }
+});
+
+const setDoneOrderIds = (state, {payload}) => ({
+    ...state,
+    doneOrderIdsByDate: {
+        ...state.doneOrderIdsByDate,
         [payload.date]: payload.orderIds
     }
 });
@@ -180,6 +206,7 @@ const updateDays = state => {
 
 export const rootReducer = createReducer(defaultState, {
     [actionTypes.SET_ORDER_IDS]: setOrderIds,
+    [actionTypes.SET_DONE_ORDER_IDS]: setDoneOrderIds,
     [actionTypes.CHANGE_ORDER]: changeOrder,
     [actionTypes.CREATE_ORDER]: createOrder,
     [actionTypes.DELETE_ORDER]: deleteOrder,

@@ -9,6 +9,14 @@ export const setOrderIds = (orderIds, date) => ({
     }
 });
 
+export const setDoneOrderIds = (orderIds, date) => ({
+    type: actionTypes.SET_DONE_ORDER_IDS,
+    payload: {
+        orderIds,
+        date
+    }
+});
+
 export const changeOrder = order => ({
     type: actionTypes.CHANGE_ORDER,
     payload: {
