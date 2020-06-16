@@ -1,6 +1,5 @@
 import React from "react";
 import './DoneOrdersPage.css';
-import Days from "../../Days/Days";
 import DoneOrdersSection from "../../DoneOrdersSection/DoneOrdersSection";
 
 export default function DoneOrdersPage({doneOrderIdsByDate, ordersById, setOrders, onOrderRestore}) {

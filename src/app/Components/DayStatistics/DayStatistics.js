@@ -1,7 +1,10 @@
 import React from "react";
 import './DayStatistics.css'
+
+import ColorCounts from "../ColorCounts/ColorCounts";
+
 import {fieldProps} from "../../Constants/OrderFieldProps";
-import {colors, textColors} from "../../Constants/Colors";
+import {getStatistics} from "../../Utils/statisticHelper";
 
 export default function DayStatistics({orders}) {
     const statistics = getStatistics(orders);
@@ -24,38 +27,7 @@ export default function DayStatistics({orders}) {
                 </tr>
                 </tbody>
             </table>
-            <div className='color-counts'>
-                {getColorCounts(statistics.byColor)}
-            </div>
+            <ColorCounts colorCounts={statistics.byColor}/>
         </div>
     );
-}
-
-function getColorCounts(byColor) {
-    return Object.entries(byColor)
-        .filter(([_, count]) => count > 0)
-        .map(([color, count]) => (
-            <span style={{backgroundColor: color, color: textColors[color]}} className='color-count'>
-                {count}
-            </span>
-        ));
-}
-
-function getStatistics(orders) {
-    return orders.reduce((acc, order) => {
-        acc.count += 1;
-        acc.quantity += order.quantity;
-        acc.area += order.area;
-        acc.byColor[order.color] += 1;
-
-        return acc;
-    }, {
-        count: 0,
-        quantity: 0,
-        area: 0,
-        byColor: colors.reduce((acc, color) => {
-            acc[color] = 0;
-            return acc;
-        }, {})
-    });
 }

@@ -1,0 +1,22 @@
+.color-counts {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+}
+
+.color-count {
+    width: 30px;
+    height: 30px;
+    margin: 3px 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: #e1e4e8 1px solid;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    font-weight: 700;
+}

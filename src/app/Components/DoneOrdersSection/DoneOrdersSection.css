@@ -1,7 +1,8 @@
 .done-orders-section {
-    border: #e1e4e8 solid 1px;
+    border: #d1d5da solid 1px;
     border-radius: 5px;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .done-orders-header,
@@ -23,4 +24,28 @@
 
 .done-orders-body .day:last-child {
     margin-bottom: 5px;
+}
+
+.done-orders-statistics .color-counts {
+    justify-content: flex-start;
+    margin: 30px 0 5px;
+}
+
+.done-orders-sums {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.done-orders-sums * {
+    text-align: center;
+    width: 30%;
+}
+
+.done-orders-sums *:first-child {
+    text-align: left;
+}
+
+.done-orders-sums *:last-child {
+    text-align: right;
 }

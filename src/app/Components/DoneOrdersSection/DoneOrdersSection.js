@@ -1,7 +1,12 @@
 import React from "react";
 import './DoneOrdersSection.css';
+
 import Days from "../Days/Days";
 import IconButton from "../IconButton/IconButton";
+import ColorCounts from "../ColorCounts/ColorCounts";
+
+import {getStatistics} from "../../Utils/statisticHelper";
+import {fieldProps} from "../../Constants/OrderFieldProps";
 
 import expandIcon from '../../../images/expand_more-24px.svg'
 import hideIcon from '../../../images/expand_less-24px.svg'
@@ -16,10 +21,7 @@ export default class DoneOrdersSection extends React.Component {
     }
 
     render() {
-        const {
-            doneOrderIdsByDate, ordersById, setOrders, onOrderRestore,
-            isExpandable, skipCount = 0, showCount, children
-        } = this.props;
+        const {isExpandable, children} = this.props;
         const {isExpanded} = this.state;
 
         return (
@@ -37,22 +39,46 @@ export default class DoneOrdersSection extends React.Component {
                     }
                 </header>
                 <div className='done-orders-body'>
-                    {
-                        isExpanded
-                            ? <Days
-                                orderIdsByDate={doneOrderIdsByDate}
-                                ordersById={ordersById}
-                                setOrders={setOrders}
-                                onOrderRestore={onOrderRestore}
-                                byDescending={true}
-                                disableDragging={true}
-                                skipCount={skipCount}
-                                showCount={showCount}
-                            />
-                            : 'Stats'
-                    }
+                    {isExpanded ? this.getDays() : this.getStats()}
                 </div>
+            </div>
+        );
+    }
 
+    getDays = () => {
+        const {
+            doneOrderIdsByDate, ordersById, setOrders, onOrderRestore, skipCount = 0, showCount
+        } = this.props;
+
+        return (
+            <Days
+                orderIdsByDate={doneOrderIdsByDate}
+                ordersById={ordersById}
+                setOrders={setOrders}
+                onOrderRestore={onOrderRestore}
+                byDescending={true}
+                disableDragging={true}
+                skipCount={skipCount}
+                showCount={showCount}
+            />
+        );
+    };
+
+    getStats = () => {
+        const {doneOrderIdsByDate, ordersById, skipCount = 0, showCount} = this.props;
+        const orders = Object.entries(doneOrderIdsByDate)
+            .slice(skipCount, skipCount + showCount)
+            .flatMap(([_, ids]) => ids.map(id => ordersById[id]));
+        const statistics = getStatistics(orders);
+
+        return (
+            <div className='done-orders-statistics'>
+                <div className='done-orders-sums'>
+                    <span>Заказов: {statistics.count}</span>
+                    <span>{fieldProps.quantity.name}: {statistics.quantity}</span>
+                    <span>{fieldProps.area.name}: {statistics.area}</span>
+                </div>
+                {orders.length > 0 && <ColorCounts colorCounts={statistics.byColor}/>}
             </div>
         );
     }
