@@ -48,29 +48,29 @@ export default class OrderButtons extends React.Component {
 
     getEditingButtons = () => (
         <>
-            {this.createButton(deleteIcon, this.props.onDelete)}
+            {this.createButton(deleteIcon, this.props.onDelete, 'Удалить')}
             {this.createColorButton()}
-            {this.createButton(saveIcon, this.props.onFinishEditing)}
-            {this.createButton(cancelIcon, this.props.onCancelEditing)}
+            {this.createButton(saveIcon, this.props.onFinishEditing, 'Подтвердить')}
+            {this.createButton(cancelIcon, this.props.onCancelEditing, 'Отменить')}
         </>
     );
 
     getStandardButtons = () => (
         <>
-            {this.createButton(editIcon, this.props.onStartEditing)}
-            {this.createButton(doneIcon, this.props.onDone)}
+            {this.createButton(editIcon, this.props.onStartEditing, 'Редактировать')}
+            {this.createButton(doneIcon, this.props.onDone, 'Выполнить')}
         </>
     );
 
     getRestoreButtons = () => (
         <>
-            {this.createButton(restoreIcon, this.props.onRestore)}
+            {this.createButton(restoreIcon, this.props.onRestore, 'Восстановаить')}
         </>
     );
 
     createColorButton = () => (
         <span className='color-picker'>
-            {this.createButton(colorsIcon, this.toggleColorPicker)}
+            {this.createButton(colorsIcon, this.toggleColorPicker, 'Изменить Цвет')}
             {
                 this.state.isColorPickerShown &&
                 <ColorPicker onChange={this.changeColor}/>
@@ -78,13 +78,14 @@ export default class OrderButtons extends React.Component {
         </span>
     );
 
-    createButton = (icon, handle) => (
+    createButton = (icon, handle, title) => (
         <IconButton
             onClick={handle}
             icon={icon}
             alt={iconAlts[icon]}
             className={'order-button'}
             tabIndex={-1}
+            title={title}
         />
     );
 

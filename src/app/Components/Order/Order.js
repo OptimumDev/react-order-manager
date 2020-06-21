@@ -17,7 +17,7 @@ export default class Order extends React.Component {
     }
 
     render() {
-        const {isEditing, order, deleteDialogShown, doneDialogShown, restoreDialogShown} = this.state;
+        const {isEditing, order} = this.state;
 
         return (
             <div className={`order-container` + (isEditing ? ' editing' : '')}>
@@ -43,17 +43,25 @@ export default class Order extends React.Component {
                         datesToCreate={this.props.datesToCreate}
                         onUpdate={this.updateOrder}
                     />
-                    {this.getDialog(deleteDialogShown, 'Удалить', this.delete, this.toggleDeleteDialog)}
-                    {this.getDialog(doneDialogShown, 'Завершить', this.markDone, this.toggleDoneDialog)}
-                    {this.getDialog(restoreDialogShown, 'Восстановить', this.restore, this.toggleRestoreDialog)}
+                    {this.getDialogs()}
                 </div>
             </div>
         );
     }
 
-    getDialog = (isShown, verb, onAccept, onCancel) => (
+    getDialogs = () => {
+        const {deleteDialogShown, doneDialogShown, restoreDialogShown} = this.state;
+
+        return [
+            this.getDialog(deleteDialogShown, 'Удалить', this.delete, this.toggleDeleteDialog, 'danger'),
+            this.getDialog(doneDialogShown, 'Завершить', this.markDone, this.toggleDoneDialog),
+            this.getDialog(restoreDialogShown, 'Восстановить', this.restore, this.toggleRestoreDialog)
+        ];
+    };
+
+    getDialog = (isShown, verb, onAccept, onCancel, use) => (
         isShown &&
-        <ConfirmationDialog acceptValue={verb} onAccept={onAccept} onCancel={onCancel}>
+        <ConfirmationDialog acceptValue={verb} onAccept={onAccept} onCancel={onCancel} use={use}>
             {verb} заказ {this.props.order.number}?
         </ConfirmationDialog>
     );
