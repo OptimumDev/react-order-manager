@@ -2,86 +2,17 @@ import * as actionTypes from '../Constants/ActionTypes';
 import {createReducer} from 'redux-create-reducer';
 import {v4 as uuidv4} from "uuid";
 import {orderBy, partition} from "../Utils/arrayHelper";
-import {colors} from "../Constants/Colors"
 import {toISODateString} from "../Utils/DateHelper";
 
-const id1 = uuidv4();
-const id2 = uuidv4();
-const id3 = uuidv4();
-const id4 = uuidv4();
-const id5 = uuidv4();
-
 const today = new Date();
-const tomorrow = new Date();
-tomorrow.setDate(today.getDate() + 1);
-const yesterday = new Date();
-yesterday.setDate(today.getDate() - 1);
-
 const todayStr = toISODateString(today);
-const tomorrowStr = toISODateString(tomorrow);
-const yesterdayStr = toISODateString(yesterday);
 
 export const defaultState = {
-    ordersById: {
-        [id1]: {
-            id: id1,
-            number: '1234.5',
-            facility: 'Объект 1',
-            quantity: 123,
-            area: 100,
-            color: colors[0],
-            date: todayStr,
-            comment: 'Важно'
-        },
-        [id2]: {
-            id: id2,
-            number: '3456',
-            facility: 'Объект 2',
-            quantity: 300,
-            area: 500,
-            color: colors[1],
-            date: todayStr,
-            comment: 'И так сойдет'
-        },
-        [id3]: {
-            id: id3,
-            number: '789',
-            facility: 'Объект 3',
-            quantity: 467,
-            area: 425,
-            color: colors[2],
-            date: tomorrowStr,
-            comment: ''
-        },
-        [id4]: {
-            id: id4,
-            number: '6754.1',
-            facility: 'Объект 4',
-            quantity: 10,
-            area: 23,
-            color: colors[3],
-            date: tomorrowStr,
-            comment: 'Неважно'
-        },
-        [id5]: {
-            id: id5,
-            number: '09876',
-            facility: 'Объект 5',
-            quantity: 1000,
-            area: 2345,
-            color: colors[4],
-            date: yesterdayStr,
-            comment: '',
-            isDone: true
-        }
-    },
+    ordersById: {},
     orderIdsByDate: {
-        [todayStr]: [id1, id2],
-        [tomorrowStr]: [id3, id4]
+        [todayStr]: [],
     },
-    doneOrderIdsByDate: {
-        [yesterdayStr]: [id5]
-    }
+    doneOrderIdsByDate: {}
 };
 
 const setOrderIds = (state, {payload}) => ({
